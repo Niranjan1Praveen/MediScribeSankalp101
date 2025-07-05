@@ -11,10 +11,12 @@ const Home = () => {
     <main>
       <Navbar />
       <Hero />
-      <LogoTicker />
-      <Features />
-      <Pricing/>
-      <Faqs />
+      <div className="bg-gradient-to-b from-slate-900 via-slate-800 to slate-900">
+        <LogoTicker />
+        <Features />
+        <Pricing/>
+        <Faqs />
+      </div>
       <Footer />
     </main>
   );

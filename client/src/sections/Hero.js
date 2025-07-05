@@ -37,47 +37,19 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 left-20 w-72 h-72 bg-emerald-500/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute top-40 right-20 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl animate-pulse delay-700"></div>
-        <div className="absolute bottom-20 left-1/3 w-80 h-80 bg-emerald-400/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
-
-        {/* Floating particles */}
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-2 h-2 bg-emerald-400/20 rounded-full"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              y: [0, -30, 0],
-              opacity: [0.2, 0.8, 0.2],
-            }}
-            transition={{
-              duration: 3 + Math.random() * 2,
-              repeat: Infinity,
-              delay: Math.random() * 2,
-              ease: "easeInOut",
-            }}
-          />
-        ))}
-      </div>
-
+      
       <div className="container mx-auto px-4 py-20 relative z-10">
         <div className="flex flex-col-reverse lg:flex-row items-center gap-16">
           {/* Left Content */}
           <div className="flex-1 text-center lg:text-left">
             {/* Badge */}
             <motion.div
-              className="inline-flex items-center gap-2 py-3 px-6 bg-gradient-to-r from-emerald-400/20 to-teal-500/20 backdrop-blur-sm rounded-full border border-emerald-400/30 mb-8"
+              className="inline-flex items-center gap-2 py-2 px-6 bg-gradient-to-r from-emerald-400/20 to-teal-500/20 backdrop-blur-sm rounded-full border border-emerald-400/30 mb-6"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <span className="text-2xl">🩺</span>
+              <span className="text-xl">🩺</span>
               <span className="text-emerald-400 font-semibold">
                 Empowering Clinicians with Voice & AI
               </span>
@@ -85,16 +57,16 @@ export default function Hero() {
 
             {/* Main Heading */}
             <motion.h1
-              className="text-5xl lg:text-7xl font-bold mb-8 leading-tight"
+              className="text-5xl lg:text-6xl font-bold mb-6 leading-tight"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
               <span className="bg-gradient-to-r from-white via-slate-200 to-white bg-clip-text text-transparent">
-                AI-Powered{" "}
+                AI-Powered
               </span>
               <span className="bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-500 bg-clip-text text-transparent">
-                Clinical Documentation
+                {" "}Clinical Documentation
               </span>
               <span className="bg-gradient-to-r from-white via-slate-200 to-white bg-clip-text text-transparent">
                 {" "}
@@ -197,14 +169,14 @@ export default function Hero() {
               <div className="absolute -inset-4 bg-gradient-to-r from-emerald-500/30 to-teal-500/30 rounded-full blur-2xl opacity-75"></div>
 
               {/* Main Image Container */}
-              <div className="relative w-80 h-80 lg:w-96 lg:h-96 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 rounded-full backdrop-blur-sm border border-emerald-400/20 flex items-center justify-center">
+              <div className="relative w-100 h-100 lg:w-120 lg:h-120 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 rounded-full backdrop-blur-sm border border-emerald-400/20 flex items-center justify-center">
                 {/* Placeholder for heroDesign image */}
-                <div className="w-64 h-64 lg:w-80 lg:h-80 bg-gradient-to-br from-emerald-400/20 to-teal-500/20 rounded-full flex items-center justify-center">
+                <div className="w-64 h-64 lg:w-100 lg:h-100 bg-gradient-to-br from-emerald-400/20 to-teal-500/20 rounded-full flex items-center justify-center">
                   <div className="text-emerald-400 text-6xl font-bold">
                     <Image
                       src={heroDesign}
                       alt="Hero Design"
-                      className="relative z-10 rounded-full"
+                      className="relative z-10 rounded-full w-full h-full"
                       width={800}
                       height={800}
                       priority

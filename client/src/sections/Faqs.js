@@ -51,13 +51,6 @@ export default function Faqs() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-20 px-4 relative overflow-hidden" id="faqs">
-      {/* Ambient particles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-emerald-400 rounded-full opacity-20 animate-pulse"></div>
-        <div className="absolute top-1/3 right-1/3 w-1 h-1 bg-teal-400 rounded-full opacity-30 animate-pulse animation-delay-1000"></div>
-        <div className="absolute bottom-1/4 left-1/3 w-1.5 h-1.5 bg-emerald-500 rounded-full opacity-25 animate-pulse animation-delay-2000"></div>
-        <div className="absolute top-2/3 right-1/4 w-1 h-1 bg-teal-500 rounded-full opacity-20 animate-pulse animation-delay-3000"></div>
-      </div>
       <div className="max-w-4xl mx-auto">
         {/* Header Section */}
         <div className="text-center mb-16 relative">

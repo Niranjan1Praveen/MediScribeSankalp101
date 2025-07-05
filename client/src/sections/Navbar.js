@@ -184,12 +184,7 @@ export default function Navbar() {
           </AnimatePresence>
         </div>
 
-        {/* Floating particles for ambient effect */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-2 left-1/4 w-1 h-1 bg-emerald-400 rounded-full opacity-20 animate-pulse"></div>
-          <div className="absolute top-4 right-1/3 w-0.5 h-0.5 bg-teal-400 rounded-full opacity-30 animate-pulse" style={{animationDelay: '1s'}}></div>
-          <div className="absolute bottom-2 left-1/2 w-0.5 h-0.5 bg-emerald-500 rounded-full opacity-25 animate-pulse" style={{animationDelay: '2s'}}></div>
-        </div>
+        
       </motion.header>
     </>
   );

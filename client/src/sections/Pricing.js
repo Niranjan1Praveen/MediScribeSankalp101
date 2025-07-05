@@ -65,14 +65,7 @@ function Pricing() {
   const [billingCycle, setBillingCycle] = useState("monthly");
 
   return (
-    <section className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-24 px-4 relative overflow-hidden">
-      {/* Ambient particles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/6 w-2 h-2 bg-emerald-400 rounded-full opacity-20 animate-pulse"></div>
-        <div className="absolute top-1/2 right-1/4 w-1 h-1 bg-teal-400 rounded-full opacity-30 animate-pulse" style={{animationDelay: '1s'}}></div>
-        <div className="absolute bottom-1/3 left-1/2 w-1.5 h-1.5 bg-emerald-500 rounded-full opacity-25 animate-pulse" style={{animationDelay: '2s'}}></div>
-        <div className="absolute top-3/4 right-1/3 w-1 h-1 bg-teal-500 rounded-full opacity-20 animate-pulse" style={{animationDelay: '3s'}}></div>
-      </div>
+    <section className="min-h-screen py-24 px-4 relative overflow-hidden">
 
       <div className="container max-w-7xl mx-auto relative z-10">
         {/* Header Section */}
