@@ -3,17 +3,16 @@ import FeatureCard from "@/components/ui/featureCard";
 import Key from "@/components/ui/key";
 import { File, FileText, Mic, Zap, Brain, Shield } from "lucide-react";
 import { motion } from "framer-motion";
+import { RegisterLink } from "@kinde-oss/kinde-auth-nextjs";
 
 const barHeights = [20, 32, 16, 40, 24, 40, 16, 32, 20];
 
 export default function Features() {
-  
   return (
     <section
       className="relative py-24 px-4 flex items-center justify-center overflow-hidden"
       id="features"
     >
-
       <div className="container relative z-10">
         {/* Enhanced Section Header */}
         <motion.div
@@ -52,7 +51,8 @@ export default function Features() {
               MediScribe
             </span>
             <span className="bg-gradient-to-r from-white via-slate-200 to-white bg-clip-text text-transparent">
-              {" "}Works?
+              {" "}
+              Works?
             </span>
           </motion.h2>
 
@@ -64,15 +64,16 @@ export default function Features() {
             transition={{ duration: 0.8, delay: 0.4 }}
             viewport={{ once: true }}
           >
-            Experience the future of healthcare documentation with our AI-powered platform that transforms how doctors work.
+            Experience the future of healthcare documentation with our
+            AI-powered platform that transforms how doctors work.
           </motion.p>
         </motion.div>
 
         {/* Enhanced Feature Cards */}
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-4 lg:grid-cols-3 gap-8">
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Card-1 - Voice Transcription */}
           <motion.div
-            className="md:col-span-2 lg:col-span-1"
+            className="h-full flex md:col-span-2 lg:col-span-1 "
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
@@ -88,7 +89,7 @@ export default function Features() {
               <div className="aspect-video flex items-center justify-center gap-8 rounded-xl p-6 relative overflow-hidden">
                 {/* Background glow */}
                 <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/5 via-teal-500/5 to-emerald-500/5 rounded-xl"></div>
-                
+
                 {/* Enhanced Mic Button */}
                 <motion.div
                   className="relative bg-gradient-to-r from-emerald-400 to-teal-500 rounded-full w-16 h-16 flex items-center justify-center shadow-lg shadow-emerald-400/50 group-hover:shadow-xl group-hover:shadow-emerald-400/70"
@@ -107,7 +108,7 @@ export default function Features() {
                   }}
                 >
                   <Mic className="w-8 h-8 text-black/80" />
-                  
+
                   {/* Pulse rings */}
                   <div className="absolute inset-0 rounded-full border-2 border-emerald-400/30 animate-ping"></div>
                   <div className="absolute inset-0 rounded-full border-2 border-emerald-400/20 animate-ping delay-1000"></div>
@@ -133,7 +134,7 @@ export default function Features() {
                       }}
                     />
                   ))}
-                  
+
                   {/* Waveform glow */}
                   <div className="absolute inset-0 bg-gradient-to-r from-emerald-400/20 to-teal-500/20 blur-sm rounded-full"></div>
                 </div>
@@ -151,7 +152,7 @@ export default function Features() {
                   }}
                 >
                   <FileText className="w-7 h-7 text-black/80" />
-                  
+
                   {/* Orbit ring */}
                   <div className="absolute inset-0 rounded-full border border-emerald-400/30"></div>
                 </motion.div>
@@ -182,7 +183,7 @@ export default function Features() {
               <div className="aspect-video flex items-center justify-center relative overflow-hidden">
                 {/* Background effects */}
                 <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 via-teal-500/5 to-emerald-500/5 rounded-xl"></div>
-                
+
                 {/* Floating brain icon */}
                 <motion.div
                   className="absolute top-4 right-4 w-8 h-8 text-emerald-400/40"
@@ -240,7 +241,7 @@ export default function Features() {
                       recommendations
                     </motion.span>
                   </motion.p>
-                  
+
                   <motion.p
                     className="text-2xl font-semibold text-emerald-400"
                     animate={{
@@ -301,7 +302,7 @@ export default function Features() {
               <div className="aspect-video flex items-center justify-center gap-4 flex-wrap relative overflow-hidden">
                 {/* Background effects */}
                 <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 via-teal-500/5 to-emerald-500/5 rounded-xl"></div>
-                
+
                 {/* Security shield icon */}
                 <motion.div
                   className="absolute top-4 left-4 w-6 h-6 text-emerald-400/40"
@@ -381,12 +382,13 @@ export default function Features() {
           >
             Ready to transform your healthcare practice?
           </motion.p>
-          
+
           <motion.div
             className="inline-flex items-center gap-2 py-3 px-8 bg-gradient-to-r from-emerald-400 to-teal-500 rounded-full text-black font-semibold cursor-pointer group hover:shadow-2xl hover:shadow-emerald-400/50 transition-all duration-500"
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
           >
+          <RegisterLink className="flex justify-center items-center lg:justify-start">
             <span>Get Started Today</span>
             <motion.svg
               className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300"
@@ -407,6 +409,7 @@ export default function Features() {
                 d="M13 7l5 5m0 0l-5 5m5-5H6"
               />
             </motion.svg>
+            </RegisterLink>
           </motion.div>
         </motion.div>
       </div>

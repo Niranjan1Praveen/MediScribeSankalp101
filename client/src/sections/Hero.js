@@ -172,16 +172,14 @@ export default function Hero() {
               <div className="relative w-100 h-100 lg:w-120 lg:h-120 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 rounded-full backdrop-blur-sm border border-emerald-400/20 flex items-center justify-center">
                 {/* Placeholder for heroDesign image */}
                 <div className="w-64 h-64 lg:w-100 lg:h-100 bg-gradient-to-br from-emerald-400/20 to-teal-500/20 rounded-full flex items-center justify-center">
-                  <div className="text-emerald-400 text-6xl font-bold">
                     <Image
                       src={heroDesign}
                       alt="Hero Design"
-                      className="relative z-10 rounded-full w-full h-full"
-                      width={800}
+                      className="relative z-10 rounded-full"
+                      width={400}
                       height={800}
                       priority
                     />
-                  </div>
                 </div>
 
                 {/* Floating Elements */}

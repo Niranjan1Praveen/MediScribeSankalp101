@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Plus, X } from "lucide-react";
+import { Plus, X, FileText, Download, Send, Trash2, User, Calendar, Heart, AlertCircle, Pill, UtensilsCrossed } from "lucide-react";
 import { toast } from "sonner";
 import Loader from "../ui/loader";
 import { Checkbox } from "../ui/checkbox";
@@ -13,6 +13,7 @@ import { Textarea } from "../ui/textarea";
 import SignaturePad from "@/components/dashboard/AppSignaturePad";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+
 export default function AppPrescription() {
   const [formData, setFormData] = useState({
     name: "",
@@ -148,6 +149,7 @@ export default function AppPrescription() {
   const removeMedication = (index) => {
     setMedications(medications.filter((_, i) => i !== index));
   };
+
   useEffect(() => {
     const fetchAutoFill = async () => {
       try {
@@ -228,6 +230,7 @@ export default function AppPrescription() {
       toast.error("Failed to save prescription to database");
     }
   };
+
   const handleClear = () => {
     setFormData({
       name: "",
@@ -241,285 +244,374 @@ export default function AppPrescription() {
       dietaryPreferences: [],
     });
   };
+
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center h-screen">
-        <Loader />
+      <div className="flex items-center justify-center h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-900">
+        <div className="relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full blur-xl opacity-30 animate-pulse"></div>
+          <Loader />
+        </div>
       </div>
     );
   }
 
   return (
-    <section className="flex items-center p-4">
-      <div className="w-full max-w-5xl rounded-xl shadow-md border-none">
-        <CardContent>
-          <div className="flex items-center justify-between mb-6 flex-wrap gap-2">
-            <div>
-              <h2 className="text-2xl font-semibold text-cyan-500 mb-2">
-                Digital Prescription
-              </h2>
-              <p className="text-sm text-muted-foreground">
-                Doctor & Patient Dialogue
-              </p>
-            </div>
+    <section className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-900 relative overflow-hidden">
+      {/* Ambient background effects */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-emerald-400/20 to-teal-400/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-teal-400/20 to-emerald-400/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-emerald-400/10 to-teal-400/10 rounded-full blur-3xl animate-pulse delay-500"></div>
+      </div>
 
-            <div className="flex gap-2">
-              <Button variant="outline" onClick={handleDownloadPdf}>
-                Save as PDF
-              </Button>
+      <div className="relative z-10 p-6">
+        <div className="w-full max-w-7xl mx-auto">
+          {/* Header Section */}
+          <div className="mb-8">
+            <div className="backdrop-blur-xl bg-white/5 rounded-2xl border border-white/10 p-6 shadow-2xl">
+              <div className="flex items-center justify-between flex-wrap gap-4">
+                <div className="flex items-center gap-4">
+                  <div className="relative">
+                    <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-xl blur opacity-75 animate-pulse"></div>
+                    <div className="relative bg-gradient-to-r from-emerald-400 to-teal-400 p-3 rounded-xl">
+                      <FileText className="h-8 w-8 text-white" />
+                    </div>
+                  </div>
+                  <div>
+                    <h1 className="text-3xl font-bold bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
+                      Digital Prescription
+                    </h1>
+                    <p className="text-slate-300 mt-1">Doctor & Patient Dialogue</p>
+                  </div>
+                </div>
+
+                <div className="flex gap-3">
+                  <Button 
+                    variant="outline" 
+                    onClick={handleDownloadPdf}
+                    className="border-emerald-400/30 bg-emerald-400/10 hover:bg-emerald-400/20 text-emerald-300 hover:text-emerald-200 transition-all duration-300 backdrop-blur-sm"
+                  >
+                    <Download className="mr-2 h-4 w-4" />
+                    Save as PDF
+                  </Button>
+                </div>
+              </div>
             </div>
           </div>
-          {/* printRef element */}
-          <div
-            className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6"
-            ref={printRef}
-          >
-            <div className="md:col-span-2 space-y-4">
-              <div className="flex items-center space-x-2">
-                <Label className="w-1/3">Patient Name</Label>
-                <Input
-                  value={formData.name || ""}
-                  onChange={(e) => handleChange("name", e.target.value)}
-                  placeholder="Name"
-                  className="w-full"
-                />
-              </div>
 
-              <div className="flex items-center space-x-2">
-                <Label className="w-1/3">Age</Label>
-                <Input
-                  value={formData.age || ""}
-                  onChange={(e) => handleChange("age", e.target.value)}
-                  placeholder="Age"
-                  className="w-full"
-                  type="text"
-                />
-              </div>
-
-              <div className="space-y-3">
-                <Label>Key Issues</Label>
-                <Textarea
-                  value={formData.keyIssues || ""}
-                  onChange={(e) => handleChange("keyIssues", e.target.value)}
-                  placeholder="e.g. fatigue, low energy"
-                />
-              </div>
-              <div className="space-y-3">
-                <Label>Decisions</Label>
-                <Textarea
-                  value={formData.decisions || ""}
-                  onChange={(e) => handleChange("decisions", e.target.value)}
-                  placeholder="e.g. perform tests"
-                />
-              </div>
-              <div className="space-y-3">
-                <Label>
-                  Medications <small>(Optional)</small>
-                </Label>
-                <Textarea
-                  value={formData.medications || ""}
-                  onChange={(e) => handleChange("medications", e.target.value)}
-                  placeholder="e.g. inhaler"
-                />
-              </div>
-              <div className="space-y-3">
-                <Label>
-                  Dietary Preferences <small>(Optional)</small>
-                </Label>
-                <div className="flex items-center gap-4">
-                  <div className="flex items-center gap-2">
-                    <Checkbox
-                      checked={formData.dietaryPreferences.includes(
-                        "Vegetarian"
-                      )}
-                      onCheckedChange={() => handleDietaryChange("Vegetarian")}
-                    />
-                    <span>Vegetarian</span>
+          {/* Main Content */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6" ref={printRef}>
+            {/* Patient Information Section */}
+            <div className="lg:col-span-2 space-y-6">
+              {/* Basic Information Card */}
+              <Card className="backdrop-blur-xl bg-white/5 border-white/10 shadow-2xl hover:shadow-emerald-500/10 transition-all duration-300">
+                <CardHeader className="border-b border-white/10">
+                  <CardTitle className="flex items-center gap-2 text-emerald-300">
+                    <User className="h-5 w-5" />
+                    Patient Information
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="p-6 space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label className="text-slate-300 flex items-center gap-2">
+                        <User className="h-4 w-4" />
+                        Patient Name
+                      </Label>
+                      <Input
+                        value={formData.name || ""}
+                        onChange={(e) => handleChange("name", e.target.value)}
+                        placeholder="Enter patient name"
+                        className="bg-white/5 border-white/10 text-white placeholder:text-slate-400 focus:border-emerald-400 focus:ring-emerald-400/20 transition-all duration-300"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label className="text-slate-300 flex items-center gap-2">
+                        <Calendar className="h-4 w-4" />
+                        Age
+                      </Label>
+                      <Input
+                        value={formData.age || ""}
+                        onChange={(e) => handleChange("age", e.target.value)}
+                        placeholder="Enter age"
+                        className="bg-white/5 border-white/10 text-white placeholder:text-slate-400 focus:border-emerald-400 focus:ring-emerald-400/20 transition-all duration-300"
+                        type="text"
+                      />
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Checkbox
-                      checked={formData.dietaryPreferences.includes(
-                        "Gluten-Free"
-                      )}
-                      onCheckedChange={() => handleDietaryChange("Gluten-Free")}
-                    />
-                    <span>Gluten-Free</span>
-                  </div>
-                </div>
-              </div>
-              <div className="space-y-3">
-                <Label>
-                  Health Goals <small>(Optional)</small>
-                </Label>
-                <Textarea
-                  value={formData.healthGoals || ""}
-                  onChange={(e) => handleChange("healthGoals", e.target.value)}
-                  placeholder="Weight Loss, Heart Health"
-                />
-              </div>
-              <div className="space-y-3">
-                <Label>
-                  Allergies <small>(Optional)</small>
-                </Label>
-                <Input
-                  value={formData.allergies || ""}
-                  onChange={(e) => handleChange("allergies", e.target.value)}
-                  placeholder="e.g. peanuts, dairy"
-                />
-              </div>
+                </CardContent>
+              </Card>
 
-              <div className="space-y-3">
-                <Label>
-                  Existing Conditions <small>(Optional)</small>
-                </Label>
-                <Input
-                  value={formData.conditions}
-                  onChange={(e) => handleChange("conditions", e.target.value)}
-                  placeholder="Hypertension, High Cholesterol"
-                />
-              </div>
-              {/* Doctor's Signature */}
-              <div className="space-y-3">
-                <div className="no-print">
-                  <label className="block text-sm font-medium">
-                    Doctor&apos;s Signature
-                  </label>
-                  <SignaturePad
-                    onSave={(signature) => handleChange("signature", signature)}
-                  />
-                </div>
-
-                {formData.signature && (
-                  <div className="mt-2">
-                    <p className="text-sm text-muted-foreground">
-                      Saved signature:
-                    </p>
-                    <img
-                      src={formData.signature}
-                      alt="Doctor's signature"
-                      className="h-20 border rounded"
+              {/* Medical Details Card */}
+              <Card className="backdrop-blur-xl bg-white/5 border-white/10 shadow-2xl hover:shadow-emerald-500/10 transition-all duration-300">
+                <CardHeader className="border-b border-white/10">
+                  <CardTitle className="flex items-center gap-2 text-emerald-300">
+                    <AlertCircle className="h-5 w-5" />
+                    Medical Assessment
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="p-6 space-y-6">
+                  <div className="space-y-3">
+                    <Label className="text-slate-300 font-medium">Key Issues</Label>
+                    <Textarea
+                      value={formData.keyIssues || ""}
+                      onChange={(e) => handleChange("keyIssues", e.target.value)}
+                      placeholder="e.g. fatigue, low energy, breathing issues"
+                      className="bg-white/5 border-white/10 text-white placeholder:text-slate-400 focus:border-emerald-400 focus:ring-emerald-400/20 transition-all duration-300 min-h-[100px]"
                     />
                   </div>
-                )}
-              </div>
-              <div className="flex gap-2 justify-between mt-2">
+                  
+                  <div className="space-y-3">
+                    <Label className="text-slate-300 font-medium">Decisions & Recommendations</Label>
+                    <Textarea
+                      value={formData.decisions || ""}
+                      onChange={(e) => handleChange("decisions", e.target.value)}
+                      placeholder="e.g. perform blood tests, chest X-ray, follow-up in 2 weeks"
+                      className="bg-white/5 border-white/10 text-white placeholder:text-slate-400 focus:border-emerald-400 focus:ring-emerald-400/20 transition-all duration-300 min-h-[100px]"
+                    />
+                  </div>
+
+                  <div className="space-y-3">
+                    <Label className="text-slate-300 font-medium">
+                      Current Medications <span className="text-slate-400 font-normal">(Optional)</span>
+                    </Label>
+                    <Textarea
+                      value={formData.medications || ""}
+                      onChange={(e) => handleChange("medications", e.target.value)}
+                      placeholder="e.g. inhaler, blood pressure medication"
+                      className="bg-white/5 border-white/10 text-white placeholder:text-slate-400 focus:border-emerald-400 focus:ring-emerald-400/20 transition-all duration-300"
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Lifestyle & Preferences Card */}
+              <Card className="backdrop-blur-xl bg-white/5 border-white/10 shadow-2xl hover:shadow-emerald-500/10 transition-all duration-300">
+                <CardHeader className="border-b border-white/10">
+                  <CardTitle className="flex items-center gap-2 text-emerald-300">
+                    <Heart className="h-5 w-5" />
+                    Lifestyle & Health Profile
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="p-6 space-y-6">
+                  <div className="space-y-3">
+                    <Label className="text-slate-300 font-medium flex items-center gap-2">
+                      <UtensilsCrossed className="h-4 w-4" />
+                      Dietary Preferences <span className="text-slate-400 font-normal">(Optional)</span>
+                    </Label>
+                    <div className="flex flex-wrap gap-6">
+                      <div className="flex items-center gap-3">
+                        <Checkbox
+                          checked={formData.dietaryPreferences.includes("Vegetarian")}
+                          onCheckedChange={() => handleDietaryChange("Vegetarian")}
+                          className="border-emerald-400/30 data-[state=checked]:bg-emerald-400 data-[state=checked]:border-emerald-400"
+                        />
+                        <span className="text-slate-300">Vegetarian</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <Checkbox
+                          checked={formData.dietaryPreferences.includes("Gluten-Free")}
+                          onCheckedChange={() => handleDietaryChange("Gluten-Free")}
+                          className="border-emerald-400/30 data-[state=checked]:bg-emerald-400 data-[state=checked]:border-emerald-400"
+                        />
+                        <span className="text-slate-300">Gluten-Free</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-3">
+                      <Label className="text-slate-300 font-medium">
+                        Health Goals <span className="text-slate-400 font-normal">(Optional)</span>
+                      </Label>
+                      <Textarea
+                        value={formData.healthGoals || ""}
+                        onChange={(e) => handleChange("healthGoals", e.target.value)}
+                        placeholder="Weight Loss, Heart Health, Muscle Gain"
+                        className="bg-white/5 border-white/10 text-white placeholder:text-slate-400 focus:border-emerald-400 focus:ring-emerald-400/20 transition-all duration-300"
+                      />
+                    </div>
+                    <div className="space-y-3">
+                      <Label className="text-slate-300 font-medium">
+                        Allergies <span className="text-slate-400 font-normal">(Optional)</span>
+                      </Label>
+                      <Input
+                        value={formData.allergies || ""}
+                        onChange={(e) => handleChange("allergies", e.target.value)}
+                        placeholder="e.g. peanuts, dairy, penicillin"
+                        className="bg-white/5 border-white/10 text-white placeholder:text-slate-400 focus:border-emerald-400 focus:ring-emerald-400/20 transition-all duration-300"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-3">
+                    <Label className="text-slate-300 font-medium">
+                      Existing Conditions <span className="text-slate-400 font-normal">(Optional)</span>
+                    </Label>
+                    <Input
+                      value={formData.conditions}
+                      onChange={(e) => handleChange("conditions", e.target.value)}
+                      placeholder="Hypertension, Diabetes, High Cholesterol"
+                      className="bg-white/5 border-white/10 text-white placeholder:text-slate-400 focus:border-emerald-400 focus:ring-emerald-400/20 transition-all duration-300"
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Signature Section */}
+              <Card className="backdrop-blur-xl bg-white/5 border-white/10 shadow-2xl hover:shadow-emerald-500/10 transition-all duration-300">
+                <CardHeader className="border-b border-white/10">
+                  <CardTitle className="text-emerald-300">Doctor's Signature</CardTitle>
+                </CardHeader>
+                <CardContent className="p-6 space-y-4">
+                  <div className="no-print">
+                    <SignaturePad
+                      onSave={(signature) => handleChange("signature", signature)}
+                    />
+                  </div>
+
+                  {formData.signature && (
+                    <div className="space-y-2">
+                      <p className="text-sm text-slate-400">Saved signature:</p>
+                      <div className="p-3 bg-white/5 rounded-lg border border-white/10">
+                        <img
+                          src={formData.signature}
+                          alt="Doctor's signature"
+                          className="h-20 max-w-full object-contain"
+                        />
+                      </div>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+
+              {/* Action Buttons */}
+              <div className="flex gap-4 justify-between flex-wrap">
                 <Button
-                  className="bg-cyan-500 no-print hover:bg-cyan-600"
+                  className="no-print bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white shadow-lg hover:shadow-emerald-500/25 transition-all duration-300 transform hover:scale-105"
                   onClick={handleFinalize}
                 >
+                  <Send className="mr-2 h-4 w-4" />
                   Finalize & Send
                 </Button>
                 <Button
-                  className="no-print"
+                  className="no-print bg-slate-700/50 hover:bg-slate-700 text-slate-300 border border-slate-600 hover:border-slate-500 transition-all duration-300"
                   onClick={handleClear}
-                  variant={"outline"}
+                  variant="outline"
                 >
+                  <Trash2 className="mr-2 h-4 w-4" />
                   Clear Data
                 </Button>
               </div>
             </div>
-            {/* Medications */}
-            <div className="space-y-4 w-full">
-              <Button
-                variant="outline"
-                className="w-full no-print"
-                onClick={addMedication}
-              >
-                <Plus className="mr-2 h-4 w-4" /> Add Medication
-              </Button>
 
-              <div className="space-y-4">
-                {medications.map((med, index) => (
-                  <Card key={index}>
-                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                      <CardTitle className="text-sm font-medium">
-                        Medication {index + 1}
-                      </CardTitle>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => removeMedication(index)}
-                      >
-                        <X className="h-4 w-4 text-destructive" />
-                      </Button>
-                    </CardHeader>
-                    <CardContent className="space-y-3">
-                      <div className="space-y-1">
-                        <Label htmlFor={`med-name-${index}`}>Name</Label>
-                        <Input
-                          id={`med-name-${index}`}
-                          value={med.name || ""}
-                          onChange={(e) =>
-                            handleMedicationChange(
-                              index,
-                              "name",
-                              e.target.value
-                            )
-                          }
-                          placeholder="e.g., Amoxicillin"
-                        />
-                      </div>
+            {/* Medications Section */}
+            <div className="space-y-6">
+              <Card className="backdrop-blur-xl bg-white/5 border-white/10 shadow-2xl hover:shadow-emerald-500/10 transition-all duration-300">
+                <CardHeader className="border-b border-white/10">
+                  <CardTitle className="flex items-center gap-2 text-emerald-300">
+                    <Pill className="h-5 w-5" />
+                    Prescribed Medications
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="p-6">
+                  <Button
+                    variant="outline"
+                    className="w-full no-print border-emerald-400/30 bg-emerald-400/10 hover:bg-emerald-400/20 text-emerald-300 hover:text-emerald-200 transition-all duration-300 mb-4"
+                    onClick={addMedication}
+                  >
+                    <Plus className="mr-2 h-4 w-4" />
+                    Add New Medication
+                  </Button>
 
-                      <div className="grid grid-cols-2 gap-4">
-                        <div className="space-y-1">
-                          <Label htmlFor={`med-dosage-${index}`}>Dosage</Label>
-                          <Input
-                            id={`med-dosage-${index}`}
-                            value={med.dosage || ""}
-                            onChange={(e) =>
-                              handleMedicationChange(
-                                index,
-                                "dosage",
-                                e.target.value
-                              )
-                            }
-                            placeholder="e.g., 500mg"
-                          />
-                        </div>
+                  <div className="space-y-4">
+                    {medications.map((med, index) => (
+                      <Card key={index} className="backdrop-blur-xl bg-white/5 border-white/10 hover:border-emerald-400/30 transition-all duration-300">
+                        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
+                          <CardTitle className="text-sm font-medium text-emerald-300">
+                            Medication {index + 1}
+                          </CardTitle>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={() => removeMedication(index)}
+                            className="h-8 w-8 text-red-400 hover:text-red-300 hover:bg-red-500/10 transition-all duration-300"
+                          >
+                            <X className="h-4 w-4" />
+                          </Button>
+                        </CardHeader>
+                        <CardContent className="space-y-4">
+                          <div className="space-y-2">
+                            <Label htmlFor={`med-name-${index}`} className="text-slate-300">
+                              Medication Name
+                            </Label>
+                            <Input
+                              id={`med-name-${index}`}
+                              value={med.name || ""}
+                              onChange={(e) =>
+                                handleMedicationChange(index, "name", e.target.value)
+                              }
+                              placeholder="e.g., Amoxicillin"
+                              className="bg-white/5 border-white/10 text-white placeholder:text-slate-400 focus:border-emerald-400 focus:ring-emerald-400/20 transition-all duration-300"
+                            />
+                          </div>
 
-                        <div className="space-y-1">
-                          <Label htmlFor={`med-frequency-${index}`}>
-                            Frequency
-                          </Label>
-                          <Input
-                            id={`med-frequency-${index}`}
-                            value={med.frequency}
-                            onChange={(e) =>
-                              handleMedicationChange(
-                                index,
-                                "frequency",
-                                e.target.value
-                              )
-                            }
-                            placeholder="e.g., Twice daily"
-                          />
-                        </div>
-                      </div>
+                          <div className="grid grid-cols-2 gap-3">
+                            <div className="space-y-2">
+                              <Label htmlFor={`med-dosage-${index}`} className="text-slate-300">
+                                Dosage
+                              </Label>
+                              <Input
+                                id={`med-dosage-${index}`}
+                                value={med.dosage || ""}
+                                onChange={(e) =>
+                                  handleMedicationChange(index, "dosage", e.target.value)
+                                }
+                                placeholder="e.g., 500mg"
+                                className="bg-white/5 border-white/10 text-white placeholder:text-slate-400 focus:border-emerald-400 focus:ring-emerald-400/20 transition-all duration-300"
+                              />
+                            </div>
 
-                      <div className="space-y-1">
-                        <Label htmlFor={`med-instructions-${index}`}>
-                          Special Instructions
-                        </Label>
-                        <Input
-                          id={`med-instructions-${index}`}
-                          value={med.instructions}
-                          onChange={(e) =>
-                            handleMedicationChange(
-                              index,
-                              "instructions",
-                              e.target.value
-                            )
-                          }
-                          placeholder="e.g., Take with food"
-                        />
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
+                            <div className="space-y-2">
+                              <Label htmlFor={`med-frequency-${index}`} className="text-slate-300">
+                                Frequency
+                              </Label>
+                              <Input
+                                id={`med-frequency-${index}`}
+                                value={med.frequency}
+                                onChange={(e) =>
+                                  handleMedicationChange(index, "frequency", e.target.value)
+                                }
+                                placeholder="e.g., Twice daily"
+                                className="bg-white/5 border-white/10 text-white placeholder:text-slate-400 focus:border-emerald-400 focus:ring-emerald-400/20 transition-all duration-300"
+                              />
+                            </div>
+                          </div>
+
+                          <div className="space-y-2">
+                            <Label htmlFor={`med-instructions-${index}`} className="text-slate-300">
+                              Special Instructions
+                            </Label>
+                            <Input
+                              id={`med-instructions-${index}`}
+                              value={med.instructions}
+                              onChange={(e) =>
+                                handleMedicationChange(index, "instructions", e.target.value)
+                              }
+                              placeholder="e.g., Take with food"
+                              className="bg-white/5 border-white/10 text-white placeholder:text-slate-400 focus:border-emerald-400 focus:ring-emerald-400/20 transition-all duration-300"
+                            />
+                          </div>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
             </div>
           </div>
-        </CardContent>
+        </div>
       </div>
     </section>
   );

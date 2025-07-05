@@ -50,24 +50,31 @@ export default function Faqs() {
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-20 px-4 relative overflow-hidden" id="faqs">
+    <div
+      className="min-h-screen py-20 px-4 relative overflow-hidden bg-slate"
+      id="faqs"
+    >
       <div className="max-w-4xl mx-auto">
         {/* Header Section */}
         <div className="text-center mb-16 relative">
-          <div className="absolute inset-0 bg-gradient-to-r from-emerald-400/20 to-teal-400/20 blur-3xl rounded-full transform -translate-y-4"></div>
+          <div className="absolute inset-0 blur-3xl rounded-full transform -translate-y-4"></div>
           <div className="relative">
-            <span className="inline-block text-emerald-400 font-semibold text-sm uppercase tracking-wider mb-4 bg-emerald-500/20 backdrop-blur-sm px-4 py-2 rounded-full border border-emerald-500/30">
+            <span className="inline-block text-emerald-400 font-semibold text-sm uppercase tracking-wider mb-4 backdrop-blur-sm px-4 py-2 rounded-full border border-emerald-500/30">
               FAQ
             </span>
             <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-white via-slate-200 to-emerald-400 bg-clip-text text-transparent mb-6 leading-tight">
-              Questions? We've got{" "}
-              <span className="relative">
-                answers
-                <div className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full transform scale-x-0 animate-pulse"></div>
+              Questions?
+              <br/>
+              <span className="">
+                 We've got answers
+                <div className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full transform scale-x-0 animate-pulse">
+                  {" "}
+                </div>
               </span>
             </h2>
             <p className="text-xl text-slate-200 max-w-2xl mx-auto leading-relaxed">
-              Everything you need to know about MediScribe's powerful AI-driven healthcare documentation platform
+              Everything you need to know about MediScribe's powerful AI-driven
+              healthcare documentation platform
             </p>
           </div>
         </div>
@@ -81,31 +88,26 @@ export default function Faqs() {
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 to-teal-500/10 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-500 transform scale-105"></div>
-              
-              <div className="relative bg-slate-800/80 backdrop-blur-sm border border-slate-700/50 rounded-2xl shadow-lg hover:shadow-2xl hover:shadow-emerald-500/10 transition-all duration-500 transform hover:-translate-y-1">
+              <div className="absolute inset-0 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-500 transform scale-105"></div>
+
+              <div className="relative backdrop-blur-sm border border-slate-700/50 rounded-2xl shadow-lg hover:shadow-2xl hover:shadow-emerald-500/10 transition-all duration-500 transform hover:-translate-y-1">
                 <Accordion type="single" collapsible className="w-full">
-                  <AccordionItem value={`item-${index}`} className="border-none">
+                  <AccordionItem
+                    value={`item-${index}`}
+                    className="border-none"
+                  >
                     <AccordionTrigger className="flex items-center justify-between w-full px-8 py-6 text-left group-hover:text-emerald-400 transition-colors duration-300">
                       <div className="flex items-center gap-4">
-                        <div className={`text-2xl transform transition-transform duration-300 ${hoveredIndex === index ? 'scale-110 rotate-12' : ''}`}>
+                        <div
+                          className={`text-2xl transform transition-transform duration-300 ${
+                            hoveredIndex === index ? "scale-110 rotate-12" : ""
+                          }`}
+                        >
                           {faq.icon}
                         </div>
                         <span className="text-lg font-semibold text-white group-hover:text-emerald-400 transition-colors duration-300">
                           {faq.question}
                         </span>
-                      </div>
-                      <div className="ml-4 flex-shrink-0">
-                        <div className="w-8 h-8 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 flex items-center justify-center shadow-md group-hover:shadow-lg group-hover:shadow-emerald-500/50 transition-all duration-300">
-                          <svg 
-                            className="w-4 h-4 text-white transform transition-transform duration-300 data-[state=open]:rotate-180" 
-                            fill="none" 
-                            stroke="currentColor" 
-                            viewBox="0 0 24 24"
-                          >
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                          </svg>
-                        </div>
                       </div>
                     </AccordionTrigger>
                     <AccordionContent className="px-8 pb-6">

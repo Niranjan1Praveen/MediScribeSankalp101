@@ -96,15 +96,6 @@ export default function Footer() {
               </Link>
             ))}
           </div>
-
-          {/* Bottom section */}
-          <div className="text-center">
-            <div className="inline-block p-4 rounded-2xl backdrop-blur-md bg-white/5 border border-emerald-400/20">
-              <p className="text-slate-400 text-sm mb-2">
-                © {new Date().getFullYear()} MediScribe. All rights reserved.
-              </p>
-            </div>
-          </div>
         </div>
       </div>
 

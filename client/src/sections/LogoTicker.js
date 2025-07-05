@@ -63,44 +63,35 @@ export default function LogoTicker() {
           {/* Ticker Container */}
           <div className="flex overflow-hidden">
             <motion.div
-              animate={{
-                x: "-50%",
-              }}
+              animate={{ x: ["0%", "-50%"] }}
               transition={{
                 duration: 25,
                 ease: "linear",
                 repeat: Infinity,
               }}
-              className="flex flex-none gap-16 pr-16 items-center"
+              className="flex flex-none gap-16 items-center min-w-max"
             >
-              {Array.from({ length: 2 }).map((_, i) => (
-                <Fragment key={i}>
-                  {logos.map((logo, logoIndex) => (
-                    <motion.div
-                      key={`${logo.name}-${i}`}
-                      className="relative group"
-                      whileHover={{ scale: 1.05 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      {/* Glow Effect */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-emerald-400/20 to-teal-400/20 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-                      {/* Logo Container */}
-                      <div className="relative bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 hover:border-emerald-400/30 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-emerald-400/10">
-                        {/* Placeholder for logo image */}
-                        <div className="relative bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-4 hover:border-emerald-400/30 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-emerald-400/10">
-                          <Image
-                            src={logo.image}
-                            alt={logo.name}
-                            width={120}
-                            height={40}
-                            className="object-contain"
-                          />
-                        </div>
-                      </div>
-                    </motion.div>
-                  ))}
-                </Fragment>
+              {/* Duplicate logos only once */}
+              {[...logos, ...logos].map((logo, index) => (
+                <motion.div
+                  key={`${logo.name}-${index}`}
+                  className="relative group"
+                  whileHover={{ scale: 0.85 }}
+                  transition={{ duration: 0.1, ease: "easeInOut" }}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-emerald-400/20 to-teal-400/20 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="relative bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 hover:border-emerald-400/30 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-emerald-400/10">
+                    <div className="relative bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-4 hover:border-emerald-400/30 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-emerald-400/10">
+                      <Image
+                        src={logo.image}
+                        alt={logo.name}
+                        width={120}
+                        height={40}
+                        className="object-contain"
+                      />
+                    </div>
+                  </div>
+                </motion.div>
               ))}
             </motion.div>
           </div>

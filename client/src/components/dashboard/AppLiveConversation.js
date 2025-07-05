@@ -2,14 +2,60 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Mic, CircleDot, Keyboard } from "lucide-react";
-import { motion } from "framer-motion";
-import { toast } from "sonner";
+import { Mic, CircleDot, Keyboard, Zap, Sparkles, Waves } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
-import { Label } from "../ui/label";
-import { v4 as uuidv4 } from "uuid";
-import { useRouter } from "next/navigation";
+import { Label } from "@/components/ui/label";
+
 const barHeights = [20, 32, 16, 40, 24, 40, 16, 32, 20];
+
+// Floating particles component
+const FloatingParticles = ({ count = 15 }) => {
+  const [particles, setParticles] = useState([]);
+
+  useEffect(() => {
+    const newParticles = Array.from({ length: count }, (_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      delay: Math.random() * 4,
+      duration: 3 + Math.random() * 2,
+      size: 1 + Math.random() * 2,
+    }));
+    setParticles(newParticles);
+  }, [count]);
+
+  return (
+    <div className="absolute inset-0 pointer-events-none overflow-hidden">
+      {particles.map((particle) => (
+        <div
+          key={particle.id}
+          className="absolute bg-emerald-400/20 rounded-full animate-pulse"
+          style={{
+            left: `${particle.x}%`,
+            top: `${particle.y}%`,
+            width: `${particle.size}px`,
+            height: `${particle.size}px`,
+            animationDelay: `${particle.delay}s`,
+            animationDuration: `${particle.duration}s`,
+          }}
+        />
+      ))}
+    </div>
+  );
+};
+
+// Pulse animation component
+const PulseRing = ({ recording, size = "w-32 h-32" }) => (
+  <div className={`relative ${size}`}>
+    {recording && (
+      <>
+        <div className="absolute inset-0 rounded-full bg-emerald-400/20 animate-ping" />
+        <div className="absolute inset-2 rounded-full bg-emerald-400/30 animate-ping animation-delay-75" />
+        <div className="absolute inset-4 rounded-full bg-emerald-400/40 animate-ping animation-delay-150" />
+      </>
+    )}
+  </div>
+);
 
 export default function AppLiveConversation() {
   const [recording, setRecording] = useState(false);
@@ -20,8 +66,21 @@ export default function AppLiveConversation() {
   const [language, setLanguage] = useState("en-US");
   const [activeTab, setActiveTab] = useState("voice");
   const recognitionRef = useRef(null);
-  const router = useRouter();
   const [patientId, setPatientId] = useState("");
+
+  // Mock implementations for dependencies
+  const toast = {
+    loading: (message) => console.log('Loading:', message),
+    success: (message, options) => console.log('Success:', message),
+    error: (message, options) => console.log('Error:', message),
+  };
+
+  const router = {
+    push: (path) => console.log('Navigate to:', path)
+  };
+
+  const uuidv4 = () => 'mock-uuid-' + Math.random().toString(36).substr(2, 9);
+
   useEffect(() => {
     setPatientId(uuidv4());
     if (typeof window !== "undefined" && "webkitSpeechRecognition" in window) {
@@ -126,161 +185,251 @@ export default function AppLiveConversation() {
   };
 
   return (
-    <div className="flex items-center justify-center p-4">
-      <div className="flex flex-col md:flex-row gap-8 items-center justify-center">
-        <div className="flex-1 flex flex-col items-center">
-          <h2 className="text-2xl text-center font-semibold text-cyan-500 mb-1">
-            Live Conversation Capture
-          </h2>
-          <p className="text-sm text-muted-foreground mb-2">
-            Doctor & Patient Dialogue
-          </p>
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
+      {/* Background Effects */}
+      <div className="absolute inset-0">
+        <div className="absolute top-0 left-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-emerald-400/5 rounded-full blur-2xl animate-pulse delay-2000" />
+      </div>
 
-          {/* Tab Selector */}
-          <div className="flex mb-4 w-full justify-center gap-4">
-            <Button
-              variant={"outline"}
-              className={`px-4 py-2 ${
-                activeTab === "voice"
-                  ? "border-b-2 border-cyan-500 text-cyan-500"
-                  : "text-muted-foreground"
-              }`}
-              onClick={() => setActiveTab("voice")}
-            >
-              Voice Input
-            </Button>
-            <Button
-              variant={"outline"}
-              className={`px-4 py-2 ${
-                activeTab === "text"
-                  ? "border-b-2 border-cyan-500 text-cyan-500"
-                  : "text-muted-foreground"
-              }`}
-              onClick={() => setActiveTab("text")}
-            >
-              Text Input
-            </Button>
+      <FloatingParticles />
+
+      <div className="relative z-10 flex items-center justify-center p-8 min-h-screen">
+        <div className="w-full max-w-4xl">
+          {/* Header Section */}
+          <div className="text-center mb-12">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <div className="w-12 h-12 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full flex items-center justify-center">
+                <Sparkles className="w-6 h-6 text-white" />
+              </div>
+              <div className="h-px bg-gradient-to-r from-emerald-400 to-teal-400 w-24" />
+              <Waves className="w-8 h-8 text-emerald-400" />
+              <div className="h-px bg-gradient-to-r from-teal-400 to-emerald-400 w-24" />
+            </div>
+            
+            <h2 className="text-4xl font-bold bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent mb-2">
+              Live Conversation Capture
+            </h2>
+            <p className="text-slate-300 text-lg">
+              Doctor & Patient Dialogue
+            </p>
           </div>
 
-          {activeTab === "voice" ? (
-            <>
-              <div className="flex items-center justify-between gap-5 my-4">
-                <select
-                  value={language}
-                  onChange={(e) => setLanguage(e.target.value)}
-                  className="rounded p-2"
-                >
-                  <option value="en-US" className="text-black">
-                    English
-                  </option>
-                  <option value="hi-IN" className="text-black">
-                    Hindi
-                  </option>
-                </select>
-
-                <Button
-                  className="bg-cyan-500 hover:bg-cyan-600"
-                  onClick={
-                    recording ? handleStopRecording : handleStartRecording
-                  }
-                >
-                  {recording ? "Stop Recording" : "Start Now"}
-                </Button>
-              </div>
-
-              <div className="relative mb-6">
-                {recording && (
-                  <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                    <CircleDot className="text-red-500 animate-ping w-4 h-4" />
-                  </div>
-                )}
-                <div className="w-20 h-20 bg-cyan-500 rounded-full flex items-center justify-center">
-                  <Mic className="text-white w-10 h-10" />
+          {/* Main Content Card */}
+          <div className="relative">
+            {/* Card Background Glow */}
+            <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 rounded-3xl blur-xl" />
+            
+            <div className="relative backdrop-blur-xl bg-slate-800/40 border border-slate-700/50 rounded-3xl p-8">
+              {/* Tab Selector */}
+              <div className="flex mb-8 justify-center">
+                <div className="flex bg-slate-900/60 backdrop-blur-sm rounded-2xl p-1 border border-slate-700/50">
+                  <Button
+                    variant="ghost"
+                    className={`px-6 py-3 rounded-xl transition-all duration-300 ${
+                      activeTab === "voice"
+                        ? "bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-lg shadow-emerald-500/25"
+                        : "text-slate-400 hover:text-white hover:bg-slate-800/50"
+                    }`}
+                    onClick={() => setActiveTab("voice")}
+                  >
+                    <Mic className="w-4 h-4 mr-2" />
+                    Voice Input
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    className={`px-6 py-3 rounded-xl transition-all duration-300 ${
+                      activeTab === "text"
+                        ? "bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-lg shadow-emerald-500/25"
+                        : "text-slate-400 hover:text-white hover:bg-slate-800/50"
+                    }`}
+                    onClick={() => setActiveTab("text")}
+                  >
+                    <Keyboard className="w-4 h-4 mr-2" />
+                    Text Input
+                  </Button>
                 </div>
               </div>
 
-              <div className="flex items-center gap-[3px]">
-                {barHeights.map((height, i) => (
-                  <motion.div
-                    key={i}
-                    className="w-1 bg-cyan-500 rounded"
-                    style={{ height: `${height}px` }}
-                    animate={
-                      recording ? { scaleY: [1, 1.8, 1] } : { scaleY: 1 }
-                    }
-                    transition={
-                      recording
-                        ? {
-                            duration: 2,
-                            repeat: Infinity,
-                            repeatType: "loop",
-                            delay: i * 0.1,
-                          }
-                        : { duration: 0 }
-                    }
-                  />
-                ))}
-              </div>
-              <div
-                className="w-full max-w-sm h-1 bg-cyan-500 rounded-full my-5"
-                style={{ width: "80%" }}
-              />
-              {startTime && (
-                <p className="text-muted-foreground text-sm mb-1 mt-4">
-                  {recording ? `Recording...` : `Duration: ${getDuration()}`}
-                </p>
-              )}
+              {activeTab === "voice" ? (
+                <div className="flex flex-col items-center space-y-8">
+                  {/* Language Selector and Record Button */}
+                  <div className="flex items-center gap-6">
+                    <div className="relative">
+                      <select
+                        value={language}
+                        onChange={(e) => setLanguage(e.target.value)}
+                        className="bg-slate-900/60 backdrop-blur-sm border border-slate-700/50 rounded-xl px-4 py-3 text-white focus:border-emerald-500/50 focus:outline-none transition-all duration-300"
+                      >
+                        <option value="en-US" className="bg-slate-900">
+                          English
+                        </option>
+                        <option value="hi-IN" className="bg-slate-900">
+                          Hindi
+                        </option>
+                      </select>
+                    </div>
 
-              {recording && (
-                <p
-                  className="text-sm text-cyan-600 cursor-pointer"
-                  onClick={handleStopRecording}
-                >
-                  Click to stop recording
-                </p>
-              )}
+                    <Button
+                      className={`px-8 py-3 rounded-xl transition-all duration-300 ${
+                        recording
+                          ? "bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 shadow-lg shadow-red-500/25"
+                          : "bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 shadow-lg shadow-emerald-500/25"
+                      }`}
+                      onClick={
+                        recording ? handleStopRecording : handleStartRecording
+                      }
+                    >
+                      {recording ? (
+                        <>
+                          <CircleDot className="w-4 h-4 mr-2 animate-pulse" />
+                          Stop Recording
+                        </>
+                      ) : (
+                        <>
+                          <Zap className="w-4 h-4 mr-2" />
+                          Start Now
+                        </>
+                      )}
+                    </Button>
+                  </div>
 
-              {!recording && transcript && (
-                <div className="mt-4 space-y-2 text-center w-full">
-                  <p className="text-sm text-muted-foreground">Transcript:</p>
-                  <div className="text-sm p-4 rounded-md whitespace-pre-wrap w-full max-w-md">
-                    {transcript}
+                  {/* Recording Visualization */}
+                  <div className="relative flex flex-col items-center space-y-6">
+                    {/* Microphone with Pulse Effect */}
+                    <div className="relative flex items-center justify-center">
+                      <PulseRing recording={recording} size="w-32 h-32" />
+                      <div className={`relative w-20 h-20 rounded-full flex items-center justify-center transition-all duration-300 ${
+                        recording 
+                          ? "bg-gradient-to-r from-red-500 to-red-600 shadow-lg shadow-red-500/50" 
+                          : "bg-gradient-to-r from-emerald-500 to-teal-500 shadow-lg shadow-emerald-500/50"
+                      }`}>
+                        <Mic className="text-white w-10 h-10" />
+                      </div>
+                      {recording && (
+                        <div className="absolute top-0 right-0">
+                          <CircleDot className="text-red-400 animate-ping w-6 h-6" />
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Audio Visualizer */}
+                    <div className="flex items-center gap-1">
+                      {barHeights.map((height, i) => (
+                        <div
+                          key={i}
+                          className={`w-2 rounded-full transition-all duration-300 ${
+                            recording 
+                              ? "bg-gradient-to-t from-emerald-500 to-teal-400" 
+                              : "bg-slate-600"
+                          }`}
+                          style={{ 
+                            height: `${recording ? height : 20}px`,
+                            animation: recording ? `pulse 2s infinite ${i * 0.1}s` : 'none'
+                          }}
+                        />
+                      ))}
+                    </div>
+
+                    {/* Progress Bar */}
+                    <div className="w-80 h-2 bg-slate-700/50 rounded-full overflow-hidden">
+                      <div 
+                        className={`h-full bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full transition-all duration-300 ${
+                          recording ? 'w-full animate-pulse' : 'w-0'
+                        }`}
+                      />
+                    </div>
+
+                    {/* Recording Status */}
+                    {startTime && (
+                      <div className="text-center space-y-2">
+                        <p className="text-slate-300">
+                          {recording ? (
+                            <span className="flex items-center justify-center gap-2">
+                              <CircleDot className="w-4 h-4 text-red-400 animate-pulse" />
+                              Recording in progress...
+                            </span>
+                          ) : (
+                            `Duration: ${getDuration()}`
+                          )}
+                        </p>
+                        {recording && (
+                          <button
+                            className="text-emerald-400 hover:text-emerald-300 transition-colors duration-300 text-sm underline"
+                            onClick={handleStopRecording}
+                          >
+                            Click to stop recording
+                          </button>
+                        )}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Transcript Display */}
+                  {!recording && transcript && (
+                    <div className="w-full max-w-2xl space-y-4">
+                      <div className="relative">
+                        <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 to-teal-500/10 rounded-2xl blur" />
+                        <div className="relative bg-slate-900/50 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-6">
+                          <div className="flex items-center gap-2 mb-4">
+                            <FileText className="w-5 h-5 text-emerald-400" />
+                            <h3 className="text-lg font-semibold text-white">Transcript</h3>
+                          </div>
+                          <p className="text-slate-300 leading-relaxed whitespace-pre-wrap">
+                            {transcript}
+                          </p>
+                        </div>
+                      </div>
+                      <Button
+                        onClick={() => handleSave(transcript)}
+                        className="w-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white py-3 rounded-xl shadow-lg shadow-emerald-500/25 transition-all duration-300"
+                      >
+                        <Sparkles className="w-4 h-4 mr-2" />
+                        Save Transcript
+                      </Button>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div className="max-w-2xl mx-auto space-y-6">
+                  <div className="space-y-4">
+                    <Label htmlFor="manual-input" className="text-lg font-semibold text-white flex items-center gap-2">
+                      <Keyboard className="w-5 h-5 text-emerald-400" />
+                      Enter Conversation Manually
+                    </Label>
+                    <div className="relative">
+                      <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 to-teal-500/10 rounded-2xl blur" />
+                      <Textarea
+                        id="manual-input"
+                        value={manualInput}
+                        onChange={(e) => setManualInput(e.target.value)}
+                        placeholder="Type the conversation here..."
+                        className="relative min-h-[300px] bg-slate-900/50 backdrop-blur-sm border border-slate-700/50 rounded-2xl text-white placeholder-slate-400 focus:border-emerald-500/50 focus:outline-none resize-none transition-all duration-300"
+                      />
+                    </div>
                   </div>
                   <Button
-                    onClick={() => handleSave(transcript)}
-                    className="bg-cyan-600 hover:bg-cyan-700 text-white"
+                    onClick={() => handleSave(manualInput)}
+                    className="w-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white py-3 rounded-xl shadow-lg shadow-emerald-500/25 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                    disabled={!manualInput.trim()}
                   >
-                    Save Transcript
+                    <Keyboard className="mr-2 h-4 w-4" />
+                    Save Text
                   </Button>
                 </div>
               )}
-            </>
-          ) : (
-            <div className="w-full max-w-md space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="manual-input">
-                  Enter Conversation Manually
-                </Label>
-                <Textarea
-                  id="manual-input"
-                  value={manualInput}
-                  onChange={(e) => setManualInput(e.target.value)}
-                  placeholder="Type the conversation here..."
-                  className="min-h-[200px]"
-                />
-              </div>
-              <Button
-                onClick={() => handleSave(manualInput)}
-                className="w-full bg-cyan-600 hover:bg-cyan-700"
-                disabled={!manualInput.trim()}
-              >
-                <Keyboard className="mr-2 h-4 w-4" />
-                Save Text
-              </Button>
             </div>
-          )}
+          </div>
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes pulse {
+          0%, 100% { transform: scaleY(1); }
+          50% { transform: scaleY(1.8); }
+        }
+      `}</style>
     </div>
   );
 }

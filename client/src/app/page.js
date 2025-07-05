@@ -14,7 +14,7 @@ const Home = () => {
       <div className="bg-gradient-to-b from-slate-900 via-slate-800 to slate-900">
         <LogoTicker />
         <Features />
-        <Pricing/>
+        <Pricing />
         <Faqs />
       </div>
       <Footer />
