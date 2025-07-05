@@ -1,0 +1,37 @@
+body {
+    background-color: #121212;
+    color: #ffffff;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    padding: 2rem;
+}
+.kpi-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+.kpi-box {
+    background-color: #1e1e1e;
+    border-left: 5px solid #2196F3;
+    padding: 1rem 1.5rem;
+    flex: 1 1 200px;
+    border-radius: 8px;
+}
+.kpi-box h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #90caf9;
+}
+.kpi-box p {
+    font-size: 1.8rem;
+    margin: 0.2rem 0 0;
+}
+canvas {
+    background-color: #1e1e1e;
+    padding: 1rem;
+    border-radius: 8px;
+}

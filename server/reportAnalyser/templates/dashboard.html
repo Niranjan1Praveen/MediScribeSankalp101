@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FBS Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Fasting Blood Sugar Dashboard</h1>
+        <div class="kpi-container">
+            <div class="kpi-box"><h3>Latest FBS</h3><p id="latestFBS">--</p></div>
+            <div class="kpi-box"><h3>Average FBS</h3><p id="averageFBS">--</p></div>
+            <div class="kpi-box"><h3>Highest FBS</h3><p id="highestFBS">--</p></div>
+            <div class="kpi-box"><h3>Prediabetic/Diabetic Readings</h3><p id="abnormalCount">--</p></div>
+        </div>
+        <canvas id="trendChart" height="100"></canvas>
+        <br>
+        <canvas id="deviationChart" height="100"></canvas>
+    </div>
+
+    <!-- Embedded JSON from Flask -->
+    <script id="json-data" type="application/json">{{ data | safe }}</script>
+
+    <!-- Inline script for DevTools logging -->
+    <script>
+        (function () {
+            // Parse JSON safely
+            const dataElement = document.getElementById('json-data');
+            const fbsData = JSON.parse(dataElement.textContent || '{}');
+
+            // Log to Chrome DevTools console
+            console.log('--- FBS Dashboard Data ---');
+            console.log('Full payload:', fbsData);
+            console.log('Patient Name:', fbsData.patient_name);
+            console.log('Latest FBS:', fbsData.latest_fbs);
+            console.log('Average FBS:', fbsData.average_fbs);
+            console.log('Highest FBS:', fbsData.highest_fbs);
+            console.log(`Abnormal Readings: ${fbsData.abnormal_readings_count} / ${fbsData.total_readings}`);
+
+            // Expose globally for ad‑hoc exploration
+            window.fbsData = fbsData;
+        })();
+    </script>
+
+    <!-- Main dashboard logic -->
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+{
+    "patient_name": "Mrs. Barnali Choudhary",
+    "fbs_trend": [
+        {
+            "date": "2025-02-01",
+            "value": 120.0
+        },
+        {
+            "date": "2024-11-02",
+            "value": 134.0
+        },
+        {
+            "date": "2024-08-10",
+            "value": 94.0
+        },
+        {
+            "date": "2024-02-08",
+            "value": 100.0
+        }
+    ],
+    "latest_fbs": 100.0,
+    "average_fbs": 112.0,
+    "highest_fbs": 134.0,
+    "total_readings": 4,
+    "abnormal_readings_count": 3,
+    "deviation_from_normal": [
+        {
+            "date": "2025-02-01",
+            "deviation": 21.0
+        },
+        {
+            "date": "2024-11-02",
+            "deviation": 35.0
+        },
+        {
+            "date": "2024-08-10",
+            "deviation": -5.0
+        },
+        {
+            "date": "2024-02-08",
+            "deviation": 1.0
+        }
+    ]
+}

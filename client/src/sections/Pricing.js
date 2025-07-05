@@ -1,10 +1,9 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Check } from "lucide-react";
-import { motion } from "framer-motion";
+import { Check, Star, Zap, Building, Users } from "lucide-react";
 
 const pricingPlans = [
   {
@@ -19,6 +18,9 @@ const pricingPlans = [
       "Standard support",
     ],
     popular: false,
+    icon: Zap,
+    description: "Perfect for individual practitioners getting started",
+    gradient: "from-slate-700 to-slate-800",
   },
   {
     title: "Pro Clinic",
@@ -34,6 +36,9 @@ const pricingPlans = [
       "Priority support",
     ],
     popular: true,
+    icon: Star,
+    description: "Most popular choice for growing clinics",
+    gradient: "from-emerald-500 to-teal-500",
   },
   {
     title: "Enterprise",
@@ -49,76 +54,174 @@ const pricingPlans = [
       "Dedicated account manager",
     ],
     popular: false,
+    icon: Building,
+    description: "Comprehensive solution for healthcare institutions",
+    gradient: "from-slate-700 to-slate-800",
   },
 ];
 
 function Pricing() {
-  return (
-    <section className="py-24 px-4 flex items-center justify-center">
-      <div className="container">
-        <h3 className="text-3xl font-medium text-center mt-6 max-w-3xl mx-auto">
-          Subscription Plans for Every Practice
-        </h3>
-        <p className="text-center text-xl mt-5 text-muted-foreground">
-          Start free and scale as your clinic grows with MediScribe&apos;s flexible SaaS plans.
-        </p>
+  const [hoveredPlan, setHoveredPlan] = useState(null);
+  const [billingCycle, setBillingCycle] = useState("monthly");
 
-        <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 items-center lg:items-end mx-auto">
-          {pricingPlans.map((plan, idx) => (
-            <Card
-              key={idx}
-              className={cn(
-                "flex flex-col justify-between shadow-md transition-all duration-300 bg-transparent border-0"
-              )}
+  return (
+    <section className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-24 px-4 relative overflow-hidden">
+      {/* Ambient particles */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 left-1/6 w-2 h-2 bg-emerald-400 rounded-full opacity-20 animate-pulse"></div>
+        <div className="absolute top-1/2 right-1/4 w-1 h-1 bg-teal-400 rounded-full opacity-30 animate-pulse" style={{animationDelay: '1s'}}></div>
+        <div className="absolute bottom-1/3 left-1/2 w-1.5 h-1.5 bg-emerald-500 rounded-full opacity-25 animate-pulse" style={{animationDelay: '2s'}}></div>
+        <div className="absolute top-3/4 right-1/3 w-1 h-1 bg-teal-500 rounded-full opacity-20 animate-pulse" style={{animationDelay: '3s'}}></div>
+      </div>
+
+      <div className="container max-w-7xl mx-auto relative z-10">
+        {/* Header Section */}
+        <div className="text-center mb-16">
+          <div className="relative inline-block">
+            <span className="inline-block text-emerald-400 font-semibold text-sm uppercase tracking-wider mb-4 bg-emerald-500/20 backdrop-blur-sm px-4 py-2 rounded-full border border-emerald-500/30">
+              Pricing Plans
+            </span>
+          </div>
+          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-white via-slate-200 to-emerald-400 bg-clip-text text-transparent mb-6 leading-tight">
+            Subscription Plans for Every Practice
+          </h2>
+          <p className="text-xl text-slate-200 max-w-2xl mx-auto leading-relaxed mb-8">
+            Start free and scale as your clinic grows with MediScribe's flexible SaaS plans.
+          </p>
+
+          {/* Billing Toggle */}
+          <div className="flex items-center justify-center gap-4 mb-12">
+            <span className={cn("text-sm font-medium transition-colors", billingCycle === "monthly" ? "text-emerald-400" : "text-slate-400")}>
+              Monthly
+            </span>
+            <button
+              onClick={() => setBillingCycle(billingCycle === "monthly" ? "yearly" : "monthly")}
+              className="relative w-14 h-7 bg-slate-700 rounded-full transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:ring-offset-2 focus:ring-offset-slate-900"
             >
-              <CardContent className="p-10 space-y-6 flex-1 flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-xl font-semibold">{plan.title}</h3>
-                    {plan.popular && (
-                      <div className="inline-flex text-sm px-4 py-1.5 rounded-xl border border-white/20">
-                        <motion.span
-                          animate={{
-                            backgroundPositionX: "-100%",
-                          }}
-                          transition={{
-                            duration: 1,
-                            repeat: Infinity,
-                            ease: "linear",
-                            repeatType: "loop",
-                          }}
-                          className="bg-[linear-gradient(to_right,#DD7DDF,#E1CD86,#BBCB92,#71C2EF,#3BFFFF,#DD7DDF)] [background-size:200%] text-transparent bg-clip-text font-medium"
-                        >
-                          Popular
-                        </motion.span>
+              <div className={cn(
+                "absolute top-0.5 w-6 h-6 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full transition-transform duration-300 shadow-lg",
+                billingCycle === "yearly" ? "translate-x-7" : "translate-x-0.5"
+              )}></div>
+            </button>
+            <span className={cn("text-sm font-medium transition-colors", billingCycle === "yearly" ? "text-emerald-400" : "text-slate-400")}>
+              Yearly
+            </span>
+            <span className="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-1 rounded-full border border-emerald-500/30">
+              Save 20%
+            </span>
+          </div>
+        </div>
+
+        {/* Pricing Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+          {pricingPlans.map((plan, idx) => {
+            const Icon = plan.icon;
+            return (
+              <div
+                key={idx}
+                className="group relative"
+                onMouseEnter={() => setHoveredPlan(idx)}
+                onMouseLeave={() => setHoveredPlan(null)}
+              >
+                {/* Glow effect */}
+                <div className={cn(
+                  "absolute inset-0 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-500 transform scale-105",
+                  plan.popular ? "bg-gradient-to-r from-emerald-500/20 to-teal-500/20" : "bg-slate-700/20"
+                )}></div>
+                
+                {/* Popular badge */}
+                {plan.popular && (
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-20">
+                    <div className="bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-xs font-semibold px-4 py-2 rounded-full shadow-lg">
+                      Most Popular
+                    </div>
+                  </div>
+                )}
+
+                <Card className={cn(
+                  "relative h-full transition-all duration-500 border-0 transform group-hover:-translate-y-2",
+                  plan.popular 
+                    ? "bg-gradient-to-br from-slate-800/90 to-slate-900/90 backdrop-blur-xl border-2 border-emerald-500/30 shadow-2xl shadow-emerald-500/10" 
+                    : "bg-slate-800/60 backdrop-blur-sm border border-slate-700/50 shadow-lg hover:shadow-xl"
+                )}>
+                  <CardContent className="p-8 h-full flex flex-col">
+                    {/* Header */}
+                    <div className="text-center mb-6">
+                      <div className={cn(
+                        "w-16 h-16 mx-auto mb-4 rounded-2xl flex items-center justify-center",
+                        plan.popular 
+                          ? "bg-gradient-to-r from-emerald-500 to-teal-500 shadow-lg shadow-emerald-500/30" 
+                          : "bg-slate-700"
+                      )}>
+                        <Icon className="w-8 h-8 text-white" />
                       </div>
-                    )}
-                  </div>
-                  <div className="text-3xl font-bold mt-2">
-                    {plan.price}
-                    <span className="text-base font-medium text-muted-foreground">
-                      {plan.frequency}
-                    </span>
-                  </div>
-                  <Button
-                    variant={"outline"}
-                    className={cn(
-                      "mt-6 w-full",
-                    )}
-                  >
-                    {plan.buttonText}
-                  </Button>
-                  <ul className="mt-6 space-y-2 text-sm">
-                    {plan.features.map((feature, i) => (
-                      <li key={i} className="flex items-start">
-                        <Check className="text-[#5EF7BA] mr-2" /> {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+                      <h3 className="text-2xl font-bold text-white mb-2">{plan.title}</h3>
+                      <p className="text-slate-400 text-sm">{plan.description}</p>
+                    </div>
+
+                    {/* Price */}
+                    <div className="text-center mb-6">
+                      <div className="flex items-end justify-center gap-1">
+                        <span className={cn(
+                          "text-4xl font-bold",
+                          plan.popular ? "text-emerald-400" : "text-white"
+                        )}>
+                          {plan.price}
+                        </span>
+                        <span className="text-slate-400 text-sm mb-1">{plan.frequency}</span>
+                      </div>
+                      {billingCycle === "yearly" && plan.price !== "₹0" && plan.price !== "Custom" && (
+                        <div className="text-sm text-slate-400 mt-1">
+                          <span className="line-through">₹{parseInt(plan.price.replace('₹', '')) * 12}</span>
+                          <span className="text-emerald-400 ml-2">₹{Math.round(parseInt(plan.price.replace('₹', '')) * 12 * 0.8)}/year</span>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Features */}
+                    <ul className="space-y-3 mb-8 flex-1">
+                      {plan.features.map((feature, i) => (
+                        <li key={i} className="flex items-start gap-3">
+                          <Check className="w-5 h-5 text-emerald-400 mt-0.5 flex-shrink-0" />
+                          <span className="text-slate-200 text-sm leading-relaxed">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    {/* Button */}
+                    <Button
+                      className={cn(
+                        "w-full py-3 font-semibold transition-all duration-300 transform hover:scale-105",
+                        plan.popular
+                          ? "bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white shadow-lg hover:shadow-xl hover:shadow-emerald-500/30"
+                          : "bg-slate-700 hover:bg-slate-600 text-white border border-slate-600 hover:border-slate-500"
+                      )}
+                    >
+                      {plan.buttonText}
+                    </Button>
+                  </CardContent>
+                </Card>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Bottom CTA */}
+        <div className="mt-16 text-center">
+          <div className="bg-gradient-to-r from-emerald-500/10 to-teal-500/10 backdrop-blur-sm rounded-3xl p-8 border border-emerald-500/20">
+            <div className="flex items-center justify-center gap-2 mb-4">
+              <Users className="w-6 h-6 text-emerald-400" />
+              <h3 className="text-2xl font-bold text-white">
+                Need a custom solution?
+              </h3>
+            </div>
+            <p className="text-slate-200 mb-6 max-w-md mx-auto">
+              We offer tailored pricing for healthcare networks and large institutions
+            </p>
+            <Button className="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-semibold px-8 py-3 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+              Schedule a Demo
+            </Button>
+          </div>
         </div>
       </div>
     </section>

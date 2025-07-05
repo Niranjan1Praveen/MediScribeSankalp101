@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import prisma from '@/app/utils/db' // Adjust the path based on your actual file structure
+import prisma from '@/app/utils/db'
 
 export async function GET(req) {
   const { searchParams } = new URL(req.url)
