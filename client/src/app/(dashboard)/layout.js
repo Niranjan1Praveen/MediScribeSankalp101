@@ -1,6 +1,5 @@
 import AppSidebar from "@/components/dashboard/AppSidebar";
 import AppNavbar from "@/components/dashboard/AppNavbar";
-import { ClientThemeProvider } from "@/components/providers/ClientThemeProvider";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { cookies } from "next/headers";
 import { Toaster } from "@/components/ui/sonner";
@@ -11,7 +10,6 @@ export default async function DashboardLayout({ children }) {
 
   return (
     <div className="min-h-screen">
-      <ClientThemeProvider>
         <SidebarProvider defaultOpen={defaultOpen}>
           <AppSidebar />
           <main className="w-full">
@@ -20,7 +18,6 @@ export default async function DashboardLayout({ children }) {
             <Toaster />
           </main>
         </SidebarProvider>
-      </ClientThemeProvider>
     </div>
   );
 }

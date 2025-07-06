@@ -49,7 +49,7 @@ const items = [
   },
   {
     title: "Fitness Generator",
-    url: "http://127.0.0.1:5000",
+    url: "/dashboard/fitnessGenerator",
     icon: Dumbbell,
   },
   {
