@@ -67,6 +67,7 @@ Powered by **Gemini LLM APIs**, MediScribe bridges the gap between healthcare ef
 ![Live Conversation Preview](./designs/liveConversation.png)  
 ![Digi Prescription Preview](./designs/digiPrescription.png)  
 ![Fitness Generator Preview](./designs/fitnessGenerator.png)
+![Report Analyzer Preview](./designs/reportAnalyzer.png)
 ![Search Prescription Preview](./designs/searchPrescription.png)
 
 ---

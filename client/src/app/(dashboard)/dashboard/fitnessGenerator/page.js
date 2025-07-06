@@ -11,7 +11,7 @@ const supabaseKey =
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 // Gemini API configuration
-const GEMINI_API_KEY = "AIzaSyDpYEhK24k0LL72AXc0Rq6O4IMnXnHPVno";
+const GEMINI_API_KEY = "AIzaSyDHYdZDd5hyGPyw47CW0SDB8-WcMlgvYgs";
 
 export default function AIDietPage() {
   const [patientName, setPatientName] = useState("");
