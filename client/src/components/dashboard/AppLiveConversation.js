@@ -2,47 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Mic, CircleDot, Keyboard, Zap, Sparkles, Waves } from "lucide-react";
+import { Mic, CircleDot, Keyboard, Zap, Sparkles, Waves, FileText } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-
+import { useRouter } from 'next/navigation';
 const barHeights = [20, 32, 16, 40, 24, 40, 16, 32, 20];
-
-// Floating particles component
-const FloatingParticles = ({ count = 15 }) => {
-  const [particles, setParticles] = useState([]);
-
-  useEffect(() => {
-    const newParticles = Array.from({ length: count }, (_, i) => ({
-      id: i,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      delay: Math.random() * 4,
-      duration: 3 + Math.random() * 2,
-      size: 1 + Math.random() * 2,
-    }));
-    setParticles(newParticles);
-  }, [count]);
-
-  return (
-    <div className="absolute inset-0 pointer-events-none overflow-hidden">
-      {particles.map((particle) => (
-        <div
-          key={particle.id}
-          className="absolute bg-emerald-400/20 rounded-full animate-pulse"
-          style={{
-            left: `${particle.x}%`,
-            top: `${particle.y}%`,
-            width: `${particle.size}px`,
-            height: `${particle.size}px`,
-            animationDelay: `${particle.delay}s`,
-            animationDuration: `${particle.duration}s`,
-          }}
-        />
-      ))}
-    </div>
-  );
-};
 
 // Pulse animation component
 const PulseRing = ({ recording, size = "w-32 h-32" }) => (
@@ -75,9 +39,7 @@ export default function AppLiveConversation() {
     error: (message, options) => console.log('Error:', message),
   };
 
-  const router = {
-    push: (path) => console.log('Navigate to:', path)
-  };
+  const router = useRouter(); 
 
   const uuidv4 = () => 'mock-uuid-' + Math.random().toString(36).substr(2, 9);
 
@@ -185,16 +147,8 @@ export default function AppLiveConversation() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-emerald-400/5 rounded-full blur-2xl animate-pulse delay-2000" />
-      </div>
-
-      <FloatingParticles />
-
+    <div className="min-h-screen relative overflow-hidden">
+    
       <div className="relative z-10 flex items-center justify-center p-8 min-h-screen">
         <div className="w-full max-w-4xl">
           {/* Header Section */}

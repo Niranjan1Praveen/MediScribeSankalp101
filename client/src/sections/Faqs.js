@@ -60,9 +60,9 @@ export default function Faqs() {
           <div className="absolute inset-0 blur-3xl rounded-full transform -translate-y-4"></div>
           <div className="relative">
             <span className="inline-block text-emerald-400 font-semibold text-sm uppercase tracking-wider mb-4 backdrop-blur-sm px-4 py-2 rounded-full border border-emerald-500/30">
-              FAQ
+              FAQS
             </span>
-            <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-white via-slate-200 to-emerald-400 bg-clip-text text-transparent mb-6 leading-tight">
+            <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-white via-slate-200 to-emerald-400 bg-clip-text text-transparent mb-6 leading-tight">
               Questions?
               <br/>
               <span className="">
@@ -99,13 +99,13 @@ export default function Faqs() {
                     <AccordionTrigger className="flex items-center justify-between w-full px-8 py-6 text-left group-hover:text-emerald-400 transition-colors duration-300">
                       <div className="flex items-center gap-4">
                         <div
-                          className={`text-2xl transform transition-transform duration-300 ${
+                          className={`text-2xl transform transition-transform duration-300  ${
                             hoveredIndex === index ? "scale-110 rotate-12" : ""
                           }`}
                         >
                           {faq.icon}
                         </div>
-                        <span className="text-lg font-semibold text-white group-hover:text-emerald-400 transition-colors duration-300">
+                        <span className="text-lg text-white group-hover:text-emerald-400 transition-colors duration-300">
                           {faq.question}
                         </span>
                       </div>
@@ -123,21 +123,6 @@ export default function Faqs() {
               </div>
             </div>
           ))}
-        </div>
-
-        {/* CTA Section */}
-        <div className="mt-16 text-center">
-          <div className="bg-gradient-to-r from-emerald-500 to-teal-500 rounded-2xl p-8 shadow-2xl shadow-emerald-500/20 backdrop-blur-sm border border-emerald-400/20">
-            <h3 className="text-2xl font-bold text-white mb-4">
-              Still have questions?
-            </h3>
-            <p className="text-emerald-100 mb-6 max-w-md mx-auto">
-              Our team is here to help you get the most out of MediScribe
-            </p>
-            <button className="bg-white text-emerald-600 font-semibold px-8 py-3 rounded-full hover:bg-slate-200 transition-colors duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
-              Contact Support
-            </button>
-          </div>
         </div>
       </div>
     </div>

@@ -10,6 +10,7 @@ import Image from "next/image";
 const navLinks = [
   { label: "Home", href: "" },
   { label: "Features", href: "#features" },
+  { label: "Pricing", href: "#pricing" },
   { label: "FAQs", href: "#faqs" },
 ];
 
@@ -33,7 +34,7 @@ export default function Navbar() {
         className={twMerge(
           "fixed top-0 w-full z-50 transition-all duration-300 px-4 py-4",
           scrolled
-            ? "bg-slate-900/80 backdrop-blur-xl border-b border-slate-700/50 shadow-lg shadow-slate-900/20"
+            ? "bg-slate-900/80 backdrop-blur-xl shadow-lg shadow-slate-900/20"
             : "bg-slate-900/60 backdrop-blur-sm"
         )}
       >
@@ -50,7 +51,7 @@ export default function Navbar() {
                 <Image 
                   src={logo} 
                   alt="Logo Icon" 
-                  className="h-10 w-10 relative z-10 rounded-xl" 
+                  className="h-12 w-10 relative z-10 rounded-xl" 
                 />
               </div>
               <div className="hidden md:block">

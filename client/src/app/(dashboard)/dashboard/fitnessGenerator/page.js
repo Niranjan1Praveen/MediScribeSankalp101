@@ -1,26 +1,27 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { createClient } from '@supabase/supabase-js';
+import { useState, useEffect } from "react";
+import { createClient } from "@supabase/supabase-js";
 
 // Supabase configuration
-const supabaseUrl = 'https://bnminmdgnjnkfkxfdgcf.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJubWlubWRnbmpua2ZreGZkZ2NmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDkyMDU0NzAsImV4cCI6MjA2NDc4MTQ3MH0.SoQYKjq_QMNKs5W6zK-ujVE2t9i1Zr-uiiEHJyzqifk';
+const supabaseUrl = "https://bnminmdgnjnkfkxfdgcf.supabase.co";
+const supabaseKey =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJubWlubWRnbmpua2ZreGZkZ2NmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDkyMDU0NzAsImV4cCI6MjA2NDc4MTQ3MH0.SoQYKjq_QMNKs5W6zK-ujVE2t9i1Zr-uiiEHJyzqifk";
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 // Gemini API configuration
-const GEMINI_API_KEY = 'AIzaSyDpYEhK24k0LL72AXc0Rq6O4IMnXnHPVno';
+const GEMINI_API_KEY = "AIzaSyDpYEhK24k0LL72AXc0Rq6O4IMnXnHPVno";
 
 export default function AIDietPage() {
-  const [patientName, setPatientName] = useState('');
+  const [patientName, setPatientName] = useState("");
   const [suggestions, setSuggestions] = useState([]);
-  const [fullPlan, setFullPlan] = useState('');
-  const [selectedPatientName, setSelectedPatientName] = useState('');
+  const [fullPlan, setFullPlan] = useState("");
+  const [selectedPatientName, setSelectedPatientName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [editedPlan, setEditedPlan] = useState('');
-  const [error, setError] = useState('');
+  const [editedPlan, setEditedPlan] = useState("");
+  const [error, setError] = useState("");
 
   // Search patient names
   const searchPatients = async (query) => {
@@ -31,15 +32,15 @@ export default function AIDietPage() {
 
     try {
       const { data, error } = await supabase
-        .from('Patient')
-        .select('name')
-        .ilike('name', `%${query}%`)
+        .from("Patient")
+        .select("name")
+        .ilike("name", `%${query}%`)
         .limit(10);
 
       if (error) throw error;
-      setSuggestions(data.map(item => item.name));
+      setSuggestions(data.map((item) => item.name));
     } catch (err) {
-      console.error('Error searching patients:', err);
+      console.error("Error searching patients:", err);
       setSuggestions([]);
     }
   };
@@ -48,15 +49,15 @@ export default function AIDietPage() {
   const getPatientByName = async (name) => {
     try {
       const { data, error } = await supabase
-        .from('Patient')
-        .select('*')
-        .eq('name', name)
+        .from("Patient")
+        .select("*")
+        .eq("name", name)
         .limit(1);
 
       if (error) throw error;
       return data.length > 0 ? data[0] : null;
     } catch (err) {
-      console.error('Error getting patient:', err);
+      console.error("Error getting patient:", err);
       return null;
     }
   };
@@ -64,30 +65,37 @@ export default function AIDietPage() {
   // Generate fitness plan using Gemini API
   const generateFitnessPlan = async (prompt) => {
     try {
-      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          contents: [{
-            parts: [{
-              text: prompt
-            }]
-          }]
-        })
-      });
+      const response = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            contents: [
+              {
+                parts: [
+                  {
+                    text: prompt,
+                  },
+                ],
+              },
+            ],
+          }),
+        }
+      );
 
       const data = await response.json();
-      
+
       if (!response.ok) {
-        throw new Error(data.error?.message || 'Failed to generate plan');
+        throw new Error(data.error?.message || "Failed to generate plan");
       }
 
       return data.candidates[0].content.parts[0].text;
     } catch (err) {
-      console.error('Gemini API error:', err);
-      throw new Error('Sorry, could not generate the plan at the moment.');
+      console.error("Gemini API error:", err);
+      throw new Error("Sorry, could not generate the plan at the moment.");
     }
   };
 
@@ -107,10 +115,10 @@ export default function AIDietPage() {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
-    
+    setError("");
+
     if (!patientName.trim()) {
-      setError('Patient name is required.');
+      setError("Patient name is required.");
       return;
     }
 
@@ -118,7 +126,7 @@ export default function AIDietPage() {
 
     try {
       const patient = await getPatientByName(patientName);
-      
+
       if (!patient) {
         setError(`No patient found with name '${patientName}'.`);
         setIsLoading(false);
@@ -128,15 +136,15 @@ export default function AIDietPage() {
       const prompt = `
 You are a certified health expert. Create a customized **diet plan** and **exercise routine** for the following patient:
 
-Name: ${patient.name || 'N/A'}
-Age: ${patient.age || 'N/A'}
-Dietary Preferences: ${patient.dietaryPreferences || 'N/A'}
-Health Goals: ${patient.healthGoals || 'N/A'}
-Conditions: ${patient.conditions || 'N/A'}
-Allergies: ${patient.allergies || 'N/A'}
-Key Issues: ${patient.keyIssues || 'N/A'}
-Medications: ${patient.medications || 'N/A'}
-Prescription Text: ${patient.prescriptionText || 'N/A'}
+Name: ${patient.name || "N/A"}
+Age: ${patient.age || "N/A"}
+Dietary Preferences: ${patient.dietaryPreferences || "N/A"}
+Health Goals: ${patient.healthGoals || "N/A"}
+Conditions: ${patient.conditions || "N/A"}
+Allergies: ${patient.allergies || "N/A"}
+Key Issues: ${patient.keyIssues || "N/A"}
+Medications: ${patient.medications || "N/A"}
+Prescription Text: ${patient.prescriptionText || "N/A"}
 
 Instructions:
 1. The diet plan should be practical, economical, and for lower, middle class indian people.
@@ -169,62 +177,46 @@ Instructions:
   // Handle click outside suggestions
   useEffect(() => {
     const handleClickOutside = (e) => {
-      if (!e.target.closest('.suggestions-container') && 
-          !e.target.closest('#patient_name')) {
+      if (
+        !e.target.closest(".suggestions-container") &&
+        !e.target.closest("#patient_name")
+      ) {
         setSuggestions([]);
       }
     };
 
-    document.addEventListener('click', handleClickOutside);
-    return () => document.removeEventListener('click', handleClickOutside);
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
-      {/* Ambient Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-teal-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-emerald-500/5 to-teal-500/5 rounded-full blur-3xl animate-pulse delay-500"></div>
-      </div>
-
-      {/* Floating Particles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 bg-emerald-400/20 rounded-full animate-bounce"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${3 + Math.random() * 4}s`,
-            }}
-          ></div>
-        ))}
-      </div>
-
+    <div className="min-h-screen relative overflow-hidden">
+      
       <div className="relative z-10 min-h-screen flex items-center justify-center p-4 md:p-8">
         <div className="w-full max-w-6xl">
           {/* Header Section */}
           <div className="text-center mb-12">
             <div className="inline-block">
-              <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-500 bg-clip-text text-transparent mb-4 animate-pulse">
+              <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-500 bg-clip-text text-transparent mb-4">
                 AI-Powered Fitness Generator
               </h1>
-              <div className="h-1 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full transform scale-x-0 animate-pulse group-hover:scale-x-100 transition-transform duration-1000"></div>
+              <div className="h-1 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-1000"></div>
             </div>
             <p className="text-slate-300 text-lg md:text-xl mt-4 max-w-2xl mx-auto">
-              Transform your health journey with personalized AI-driven fitness and nutrition plans
+              Transform your health journey with personalized AI-driven fitness
+              and nutrition plans
             </p>
           </div>
-          
+
           {/* Form Section */}
           <div className="flex flex-col items-center justify-center mb-12">
             <div className="w-full max-w-md">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="relative group">
-                  <label htmlFor="patient_name" className="block mb-3 text-emerald-400 font-semibold text-lg">
+                  <label
+                    htmlFor="patient_name"
+                    className="block mb-3 text-emerald-400 font-semibold text-lg"
+                  >
                     Patient Name
                   </label>
                   <div className="relative">
@@ -240,7 +232,7 @@ Instructions:
                     />
                     <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/0 via-emerald-500/5 to-teal-500/0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
                   </div>
-                  
+
                   {suggestions.length > 0 && (
                     <div className="suggestions-container absolute top-full left-0 right-0 mt-2 max-h-48 overflow-y-auto bg-slate-800/90 backdrop-blur-md border border-slate-700 rounded-xl z-50 shadow-2xl">
                       {suggestions.map((name, index) => (
@@ -255,9 +247,9 @@ Instructions:
                     </div>
                   )}
                 </div>
-                
-                <button 
-                  type="submit" 
+
+                <button
+                  type="submit"
                   disabled={isLoading}
                   className="w-full relative overflow-hidden bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 disabled:from-slate-600 disabled:to-slate-700 text-white font-bold py-4 px-8 rounded-xl uppercase tracking-wide transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-emerald-500/25 disabled:hover:scale-100 disabled:hover:shadow-none group"
                 >
@@ -268,7 +260,7 @@ Instructions:
                         <span>Generating Plan...</span>
                       </div>
                     ) : (
-                      'Generate Plan'
+                      "Generate Plan"
                     )}
                   </span>
                   <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
@@ -295,12 +287,12 @@ Instructions:
                 </h2>
                 <div className="w-24 h-1 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full mx-auto"></div>
               </div>
-              
+
               <div className="max-w-5xl mx-auto">
                 <div className="bg-slate-800/30 backdrop-blur-md border border-slate-700 rounded-2xl p-6 md:p-8 shadow-2xl hover:shadow-emerald-500/10 transition-all duration-300">
                   {!isEditing ? (
                     <div className="relative">
-                      <pre className="text-slate-200 whitespace-pre-wrap font-mono text-sm md:text-base leading-relaxed min-h-96 overflow-x-auto p-6 bg-slate-900/50 rounded-xl border border-slate-700">
+                      <pre className="text-slate-200 whitespace-pre-wrap text-sm md:text-base leading-relaxed min-h-96 overflow-x-auto p-6 bg-slate-900/50 rounded-xl border border-slate-700">
                         {fullPlan}
                       </pre>
                       <div className="absolute top-4 right-4 w-3 h-3 bg-emerald-400 rounded-full animate-pulse"></div>
@@ -310,12 +302,12 @@ Instructions:
                       <textarea
                         value={editedPlan}
                         onChange={(e) => setEditedPlan(e.target.value)}
-                        className="w-full text-slate-200 p-6 rounded-xl bg-slate-900/50 border border-slate-700 min-h-96 font-mono text-sm md:text-base leading-relaxed resize-y focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent transition-all duration-300"
+                        className="w-full text-slate-200 p-6 rounded-xl bg-slate-900/50 border border-slate-700 min-h-96 text-sm md:text-base leading-relaxed resize-y focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent transition-all duration-300"
                       />
                       <div className="absolute top-4 right-4 w-3 h-3 bg-teal-400 rounded-full animate-pulse"></div>
                     </div>
                   )}
-                  
+
                   <div className="flex justify-center mt-8">
                     <button
                       type="button"
@@ -323,7 +315,7 @@ Instructions:
                       className="relative overflow-hidden bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-600 hover:to-emerald-600 text-white font-bold py-3 px-8 rounded-xl uppercase tracking-wide transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:shadow-teal-500/25 group"
                     >
                       <span className="relative z-10">
-                        {isEditing ? '💾 Save Changes' : '✏️ Edit Plan'}
+                        {isEditing ? "💾 Save Changes" : "✏️ Edit Plan"}
                       </span>
                       <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
                     </button>
@@ -346,7 +338,7 @@ Instructions:
             transform: translateY(0);
           }
         }
-        
+
         .animate-fadeIn {
           animation: fadeIn 0.8s ease-out;
         }

@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
-import { Mic, Stethoscope, Search, FileText, Utensils, Dumbbell, Sparkles, TrendingUp, Clock, Heart } from 'lucide-react';
+import { Mic, Stethoscope, Search, FileText, Utensils, Dumbbell, BarChart, Sparkles, TrendingUp, Clock, Heart } from 'lucide-react';
 
 const features = [
   {
@@ -18,16 +18,16 @@ const features = [
     description: "Instant digital prescription generation with clinician review",
   },
   {
-    title: "AI Diet Plans",
+    title: "AI Diet & Excercise Plans",
     url: "/dashboard/fitnessGenerator",
     icon: Utensils,
     description: "Personalized nutrition recommendations based on patient data",
   },
   {
-    title: "Exercise Routines",
-    url: "/dashboard/fitnessGenerator",
-    icon: Dumbbell,
-    description: "Customized workout plans tailored to patient health status",
+    title: "Report Analyser",
+    url: "http://127.0.0.1:5001",
+    icon: BarChart,
+    description: "Get Analysis of your fasting blood sugar reports",
   },
   {
     title: "Consultation History",
@@ -110,17 +110,8 @@ export default function MediScribeDashboard() {
   const [hoveredCard, setHoveredCard] = useState(null);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
-      {/* Floating Particles */}
-      <FloatingParticles />
+    <div className="min-h-screen relative overflow-hidden">
       
-      {/* Background Ambient Lighting */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-emerald-400/5 rounded-full blur-2xl animate-pulse delay-2000" />
-      </div>
-
       <div className="relative z-10 p-6">
         <main className="container mx-auto grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* Main Content Area */}

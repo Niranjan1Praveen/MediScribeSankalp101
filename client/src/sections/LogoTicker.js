@@ -85,8 +85,8 @@ export default function LogoTicker() {
                       <Image
                         src={logo.image}
                         alt={logo.name}
-                        width={120}
-                        height={40}
+                        width={150}
+                        height={50}
                         className="object-contain"
                       />
                     </div>

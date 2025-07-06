@@ -65,7 +65,7 @@ function Pricing() {
   const [billingCycle, setBillingCycle] = useState("monthly");
 
   return (
-    <section className="min-h-screen py-24 px-4 relative overflow-hidden">
+    <section className="min-h-screen py-24 px-4 relative overflow-hidden" id="pricing">
 
       <div className="container max-w-7xl mx-auto relative z-10">
         {/* Header Section */}
@@ -78,7 +78,7 @@ function Pricing() {
           <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-white via-slate-200 to-emerald-400 bg-clip-text text-transparent mb-6 leading-tight">
             Subscription Plans for Every Practice
           </h2>
-          <p className="text-xl text-slate-200 max-w-2xl mx-auto leading-relaxed mb-8">
+          <p className="text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed mb-8">
             Start free and scale as your clinic grows with MediScribe's flexible SaaS plans.
           </p>
 
@@ -197,24 +197,6 @@ function Pricing() {
               </div>
             );
           })}
-        </div>
-
-        {/* Bottom CTA */}
-        <div className="mt-16 text-center">
-          <div className="bg-gradient-to-r from-emerald-500/10 to-teal-500/10 backdrop-blur-sm rounded-3xl p-8 border border-emerald-500/20">
-            <div className="flex items-center justify-center gap-2 mb-4">
-              <Users className="w-6 h-6 text-emerald-400" />
-              <h3 className="text-2xl font-bold text-white">
-                Need a custom solution?
-              </h3>
-            </div>
-            <p className="text-slate-200 mb-6 max-w-md mx-auto">
-              We offer tailored pricing for healthcare networks and large institutions
-            </p>
-            <Button className="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-semibold px-8 py-3 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
-              Schedule a Demo
-            </Button>
-          </div>
         </div>
       </div>
     </section>

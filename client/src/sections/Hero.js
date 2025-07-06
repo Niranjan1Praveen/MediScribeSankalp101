@@ -36,8 +36,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-      
+    <section className="relative py-20 flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
       <div className="container mx-auto px-4 py-20 relative z-10">
         <div className="flex flex-col-reverse lg:flex-row items-center gap-16">
           {/* Left Content */}
@@ -76,7 +75,7 @@ export default function Hero() {
 
             {/* Description */}
             <motion.p
-              className="text-xl lg:text-2xl text-slate-300 mb-10 leading-relaxed max-w-3xl"
+              className="text-xl lg:text-2xl text-slate-300 mb-6 leading-relaxed max-w-3xl"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
@@ -84,7 +83,7 @@ export default function Hero() {
               MediScribe listens, understands, and documents. From real-time
               voice transcription to auto-generated prescriptions, diet and
               exercise plans — our assistant lets doctors{" "}
-              <span className="text-emerald-400 font-semibold">
+              <span className="text-emerald-400 font-semibold italic">
                 focus more on care
               </span>{" "}
               and less on paperwork.
@@ -102,7 +101,7 @@ export default function Hero() {
                   type="submit"
                   variant="signup"
                   size="sm"
-                  className="whitespace-nowrap rounded-md group relative overflow-hidden"
+                  className="whitespace-nowrap rounded-md group relative overflow-hidden cursor-pointer"
                 >
                   <span className="relative z-10 flex items-center gap-2">
                     Get Started

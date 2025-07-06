@@ -119,7 +119,7 @@ export default function AppSignaturePad({
           Clear
         </Button>
         <Button
-          className="px-4 py-2 text-sm font-medium rounded-md border shadow-sm bg-cyan-500 hover:bg-cyan-600"
+          className="px-4 py-2 text-sm font-medium rounded-md border shadow-sm bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600"
           onClick={saveSignature}
         >
           Save Signature

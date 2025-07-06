@@ -247,7 +247,7 @@ export default function AppPrescription() {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-900">
+      <div className="flex items-center justify-center h-screen">
         <div className="relative">
           <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full blur-xl opacity-30 animate-pulse"></div>
           <Loader />
@@ -257,14 +257,7 @@ export default function AppPrescription() {
   }
 
   return (
-    <section className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-900 relative overflow-hidden">
-      {/* Ambient background effects */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-emerald-400/20 to-teal-400/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-teal-400/20 to-emerald-400/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-emerald-400/10 to-teal-400/10 rounded-full blur-3xl animate-pulse delay-500"></div>
-      </div>
-
+    <section className="min-h-screen relative overflow-hidden">
       <div className="relative z-10 p-6">
         <div className="w-full max-w-7xl mx-auto">
           {/* Header Section */}
@@ -282,7 +275,7 @@ export default function AppPrescription() {
                     <h1 className="text-3xl font-bold bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
                       Digital Prescription
                     </h1>
-                    <p className="text-slate-300 mt-1">Doctor & Patient Dialogue</p>
+                    <p className=" mt-1">Doctor & Patient Dialogue</p>
                   </div>
                 </div>
 
@@ -315,7 +308,7 @@ export default function AppPrescription() {
                 <CardContent className="p-6 space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <Label className="text-slate-300 flex items-center gap-2">
+                      <Label className=" flex items-center gap-2">
                         <User className="h-4 w-4" />
                         Patient Name
                       </Label>
@@ -323,11 +316,11 @@ export default function AppPrescription() {
                         value={formData.name || ""}
                         onChange={(e) => handleChange("name", e.target.value)}
                         placeholder="Enter patient name"
-                        className="bg-white/5 border-white/10 text-white placeholder:text-slate-400 focus:border-emerald-400 focus:ring-emerald-400/20 transition-all duration-300"
+                        className="bg-white/5 border-white/10 text-white  focus:border-emerald-400 focus:ring-emerald-400/20 transition-all duration-300"
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label className="text-slate-300 flex items-center gap-2">
+                      <Label className=" flex items-center gap-2">
                         <Calendar className="h-4 w-4" />
                         Age
                       </Label>
@@ -335,7 +328,7 @@ export default function AppPrescription() {
                         value={formData.age || ""}
                         onChange={(e) => handleChange("age", e.target.value)}
                         placeholder="Enter age"
-                        className="bg-white/5 border-white/10 text-white placeholder:text-slate-400 focus:border-emerald-400 focus:ring-emerald-400/20 transition-all duration-300"
+                        className="bg-white/5 border-white/10 text-white  focus:border-emerald-400 focus:ring-emerald-400/20 transition-all duration-300"
                         type="text"
                       />
                     </div>
@@ -353,34 +346,34 @@ export default function AppPrescription() {
                 </CardHeader>
                 <CardContent className="p-6 space-y-6">
                   <div className="space-y-3">
-                    <Label className="text-slate-300 font-medium">Key Issues</Label>
+                    <Label className=" font-medium">Key Issues</Label>
                     <Textarea
                       value={formData.keyIssues || ""}
                       onChange={(e) => handleChange("keyIssues", e.target.value)}
                       placeholder="e.g. fatigue, low energy, breathing issues"
-                      className="bg-white/5 border-white/10 text-white placeholder:text-slate-400 focus:border-emerald-400 focus:ring-emerald-400/20 transition-all duration-300 min-h-[100px]"
+                      className="bg-white/5 border-white/10 text-white  focus:border-emerald-400 focus:ring-emerald-400/20 transition-all duration-300 min-h-[100px]"
                     />
                   </div>
                   
                   <div className="space-y-3">
-                    <Label className="text-slate-300 font-medium">Decisions & Recommendations</Label>
+                    <Label className=" font-medium">Decisions & Recommendations</Label>
                     <Textarea
                       value={formData.decisions || ""}
                       onChange={(e) => handleChange("decisions", e.target.value)}
                       placeholder="e.g. perform blood tests, chest X-ray, follow-up in 2 weeks"
-                      className="bg-white/5 border-white/10 text-white placeholder:text-slate-400 focus:border-emerald-400 focus:ring-emerald-400/20 transition-all duration-300 min-h-[100px]"
+                      className="bg-white/5 border-white/10 text-white  focus:border-emerald-400 focus:ring-emerald-400/20 transition-all duration-300 min-h-[100px]"
                     />
                   </div>
 
                   <div className="space-y-3">
-                    <Label className="text-slate-300 font-medium">
-                      Current Medications <span className="text-slate-400 font-normal">(Optional)</span>
+                    <Label className=" font-medium">
+                      Current Medications <span className="font-normal">(Optional)</span>
                     </Label>
                     <Textarea
                       value={formData.medications || ""}
                       onChange={(e) => handleChange("medications", e.target.value)}
                       placeholder="e.g. inhaler, blood pressure medication"
-                      className="bg-white/5 border-white/10 text-white placeholder:text-slate-400 focus:border-emerald-400 focus:ring-emerald-400/20 transition-all duration-300"
+                      className="bg-white/5 border-white/10 text-white  focus:border-emerald-400 focus:ring-emerald-400/20 transition-all duration-300"
                     />
                   </div>
                 </CardContent>
@@ -396,9 +389,9 @@ export default function AppPrescription() {
                 </CardHeader>
                 <CardContent className="p-6 space-y-6">
                   <div className="space-y-3">
-                    <Label className="text-slate-300 font-medium flex items-center gap-2">
+                    <Label className=" font-medium flex items-center gap-2">
                       <UtensilsCrossed className="h-4 w-4" />
-                      Dietary Preferences <span className="text-slate-400 font-normal">(Optional)</span>
+                      Dietary Preferences <span className="font-normal">(Optional)</span>
                     </Label>
                     <div className="flex flex-wrap gap-6">
                       <div className="flex items-center gap-3">
@@ -407,7 +400,7 @@ export default function AppPrescription() {
                           onCheckedChange={() => handleDietaryChange("Vegetarian")}
                           className="border-emerald-400/30 data-[state=checked]:bg-emerald-400 data-[state=checked]:border-emerald-400"
                         />
-                        <span className="text-slate-300">Vegetarian</span>
+                        <span className="">Vegetarian</span>
                       </div>
                       <div className="flex items-center gap-3">
                         <Checkbox
@@ -415,45 +408,45 @@ export default function AppPrescription() {
                           onCheckedChange={() => handleDietaryChange("Gluten-Free")}
                           className="border-emerald-400/30 data-[state=checked]:bg-emerald-400 data-[state=checked]:border-emerald-400"
                         />
-                        <span className="text-slate-300">Gluten-Free</span>
+                        <span className="">Gluten-Free</span>
                       </div>
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-3">
-                      <Label className="text-slate-300 font-medium">
-                        Health Goals <span className="text-slate-400 font-normal">(Optional)</span>
+                      <Label className=" font-medium">
+                        Health Goals <span className="font-normal">(Optional)</span>
                       </Label>
                       <Textarea
                         value={formData.healthGoals || ""}
                         onChange={(e) => handleChange("healthGoals", e.target.value)}
                         placeholder="Weight Loss, Heart Health, Muscle Gain"
-                        className="bg-white/5 border-white/10 text-white placeholder:text-slate-400 focus:border-emerald-400 focus:ring-emerald-400/20 transition-all duration-300"
+                        className="bg-white/5 border-white/10 text-white  focus:border-emerald-400 focus:ring-emerald-400/20 transition-all duration-300"
                       />
                     </div>
                     <div className="space-y-3">
-                      <Label className="text-slate-300 font-medium">
-                        Allergies <span className="text-slate-400 font-normal">(Optional)</span>
+                      <Label className=" font-medium">
+                        Allergies <span className="font-normal">(Optional)</span>
                       </Label>
                       <Input
                         value={formData.allergies || ""}
                         onChange={(e) => handleChange("allergies", e.target.value)}
                         placeholder="e.g. peanuts, dairy, penicillin"
-                        className="bg-white/5 border-white/10 text-white placeholder:text-slate-400 focus:border-emerald-400 focus:ring-emerald-400/20 transition-all duration-300"
+                        className="bg-white/5 border-white/10 text-white  focus:border-emerald-400 focus:ring-emerald-400/20 transition-all duration-300"
                       />
                     </div>
                   </div>
 
                   <div className="space-y-3">
-                    <Label className="text-slate-300 font-medium">
-                      Existing Conditions <span className="text-slate-400 font-normal">(Optional)</span>
+                    <Label className=" font-medium">
+                      Existing Conditions <span className="font-normal">(Optional)</span>
                     </Label>
                     <Input
                       value={formData.conditions}
                       onChange={(e) => handleChange("conditions", e.target.value)}
                       placeholder="Hypertension, Diabetes, High Cholesterol"
-                      className="bg-white/5 border-white/10 text-white placeholder:text-slate-400 focus:border-emerald-400 focus:ring-emerald-400/20 transition-all duration-300"
+                      className="bg-white/5 border-white/10 text-white  focus:border-emerald-400 focus:ring-emerald-400/20 transition-all duration-300"
                     />
                   </div>
                 </CardContent>
@@ -496,7 +489,7 @@ export default function AppPrescription() {
                   Finalize & Send
                 </Button>
                 <Button
-                  className="no-print bg-slate-700/50 hover:bg-slate-700 text-slate-300 border border-slate-600 hover:border-slate-500 transition-all duration-300"
+                  className="no-print bg-slate-700/50 hover:bg-slate-700  border border-slate-600 hover:border-slate-500 transition-all duration-300"
                   onClick={handleClear}
                   variant="outline"
                 >
@@ -543,7 +536,7 @@ export default function AppPrescription() {
                         </CardHeader>
                         <CardContent className="space-y-4">
                           <div className="space-y-2">
-                            <Label htmlFor={`med-name-${index}`} className="text-slate-300">
+                            <Label htmlFor={`med-name-${index}`} className="">
                               Medication Name
                             </Label>
                             <Input
@@ -553,13 +546,13 @@ export default function AppPrescription() {
                                 handleMedicationChange(index, "name", e.target.value)
                               }
                               placeholder="e.g., Amoxicillin"
-                              className="bg-white/5 border-white/10 text-white placeholder:text-slate-400 focus:border-emerald-400 focus:ring-emerald-400/20 transition-all duration-300"
+                              className="bg-white/5 border-white/10 text-white  focus:border-emerald-400 focus:ring-emerald-400/20 transition-all duration-300"
                             />
                           </div>
 
                           <div className="grid grid-cols-2 gap-3">
                             <div className="space-y-2">
-                              <Label htmlFor={`med-dosage-${index}`} className="text-slate-300">
+                              <Label htmlFor={`med-dosage-${index}`} className="">
                                 Dosage
                               </Label>
                               <Input
@@ -569,12 +562,12 @@ export default function AppPrescription() {
                                   handleMedicationChange(index, "dosage", e.target.value)
                                 }
                                 placeholder="e.g., 500mg"
-                                className="bg-white/5 border-white/10 text-white placeholder:text-slate-400 focus:border-emerald-400 focus:ring-emerald-400/20 transition-all duration-300"
+                                className="bg-white/5 border-white/10 text-white  focus:border-emerald-400 focus:ring-emerald-400/20 transition-all duration-300"
                               />
                             </div>
 
                             <div className="space-y-2">
-                              <Label htmlFor={`med-frequency-${index}`} className="text-slate-300">
+                              <Label htmlFor={`med-frequency-${index}`} className="">
                                 Frequency
                               </Label>
                               <Input
@@ -584,13 +577,13 @@ export default function AppPrescription() {
                                   handleMedicationChange(index, "frequency", e.target.value)
                                 }
                                 placeholder="e.g., Twice daily"
-                                className="bg-white/5 border-white/10 text-white placeholder:text-slate-400 focus:border-emerald-400 focus:ring-emerald-400/20 transition-all duration-300"
+                                className="bg-white/5 border-white/10 text-white  focus:border-emerald-400 focus:ring-emerald-400/20 transition-all duration-300"
                               />
                             </div>
                           </div>
 
                           <div className="space-y-2">
-                            <Label htmlFor={`med-instructions-${index}`} className="text-slate-300">
+                            <Label htmlFor={`med-instructions-${index}`} className="">
                               Special Instructions
                             </Label>
                             <Input
@@ -600,7 +593,7 @@ export default function AppPrescription() {
                                 handleMedicationChange(index, "instructions", e.target.value)
                               }
                               placeholder="e.g., Take with food"
-                              className="bg-white/5 border-white/10 text-white placeholder:text-slate-400 focus:border-emerald-400 focus:ring-emerald-400/20 transition-all duration-300"
+                              className="bg-white/5 border-white/10 text-white  focus:border-emerald-400 focus:ring-emerald-400/20 transition-all duration-300"
                             />
                           </div>
                         </CardContent>

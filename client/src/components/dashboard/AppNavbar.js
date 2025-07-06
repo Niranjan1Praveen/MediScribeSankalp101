@@ -16,37 +16,19 @@ import AppLogout from "./AppLogout";
 const AppNavbar = () => {
   return (
     <nav className="relative p-6 flex items-center justify-between z-10 overflow-hidden">
-      {/* Enhanced Ambient Background with Multiple Layers */}
-      <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/8 via-teal-500/6 to-emerald-500/8 backdrop-blur-md" />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-emerald-500/[0.03] to-transparent" />
-      <div className="absolute inset-0 bg-gradient-to-t from-slate-900/10 via-transparent to-slate-900/10" />
-      
       {/* Animated Gradient Overlay */}
       <div className="absolute inset-0 opacity-30">
-        <div className="absolute inset-0 bg-gradient-to-r from-emerald-400/10 via-teal-400/10 to-emerald-400/10 animate-pulse" 
+        <div className="absolute inset-0 bg-gradient-to-r from-emerald-400/10 via-teal-400/10 to-emerald-400/10" 
              style={{
                animation: 'pulse 4s ease-in-out infinite alternate'
              }} />
       </div>
 
-      {/* Enhanced Floating Particles with Glow */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-3 left-1/4 w-2 h-2 bg-emerald-400/40 rounded-full animate-pulse shadow-lg shadow-emerald-400/50" />
-        <div className="absolute top-2 right-1/3 w-1.5 h-1.5 bg-teal-400/30 rounded-full animate-pulse delay-1000 shadow-md shadow-teal-400/40" />
-        <div className="absolute bottom-4 left-1/2 w-1 h-1 bg-emerald-300/50 rounded-full animate-pulse delay-500 shadow-sm shadow-emerald-300/60" />
-        <div className="absolute top-1/2 left-1/6 w-0.5 h-0.5 bg-teal-300/40 rounded-full animate-pulse delay-2000" />
-        <div className="absolute bottom-2 right-1/4 w-1.5 h-1.5 bg-emerald-400/30 rounded-full animate-pulse delay-1500 shadow-md shadow-emerald-400/40" />
-      </div>
-
-      {/* Subtle Glow Lines */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-400/30 to-transparent" />
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-teal-400/20 to-transparent" />
-
       {/* LEFT SECTION - Enhanced Sidebar Trigger */}
       <div className="relative z-10">
         <div className="group relative">
           {/* Glow Effect */}
-          <div className="absolute -inset-3 bg-gradient-to-r from-emerald-500/30 via-teal-500/25 to-emerald-500/30 rounded-xl blur-md opacity-0 group-hover:opacity-100 transition-all duration-500 animate-pulse" />
+          <div className="absolute -inset-3 bg-gradient-to-r from-emerald-500/30 via-teal-500/25 to-emerald-500/30 rounded-xl blur-md opacity-0 group-hover:opacity-100 transition-all duration-500" />
           
           {/* Background Shimmer */}
           <div className="absolute -inset-2 bg-gradient-to-r from-emerald-500/10 to-teal-500/10 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300" />
@@ -60,7 +42,7 @@ const AppNavbar = () => {
         {/* Decorative Element */}
         <div className="hidden sm:block relative">
           <div className="flex items-center gap-1 px-3 py-1.5 bg-gradient-to-r from-emerald-500/10 to-teal-500/10 rounded-full border border-emerald-500/20 backdrop-blur-sm">
-            <Sparkles className="h-3 w-3 text-emerald-400 animate-pulse" />
+            <Sparkles className="h-3 w-3 text-emerald-400" />
             <span className="text-xs font-medium text-emerald-400">Online</span>
           </div>
         </div>
@@ -83,7 +65,7 @@ const AppNavbar = () => {
                      }} />
                 
                 {/* Inner Glow */}
-                <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 rounded-full animate-pulse" />
+                <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 rounded-full " />
                 
                 <Avatar className="relative border-2 border-emerald-500/40 hover:border-emerald-400/60 transition-all duration-500 hover:shadow-xl hover:shadow-emerald-500/30 hover:scale-110 active:scale-95 bg-gradient-to-r from-emerald-500/10 to-teal-500/10 backdrop-blur-sm">
                   <AvatarImage src="https://avatars.githubusercontent.com/u/1486366" className="object-cover" />
@@ -91,7 +73,7 @@ const AppNavbar = () => {
                 </Avatar>
                 
                 {/* Status Indicator */}
-                <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-400 rounded-full border-2 border-slate-900 shadow-lg shadow-emerald-400/50 animate-pulse" />
+                <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-400 rounded-full border-2 border-slate-900 shadow-lg shadow-emerald-400/50 " />
               </div>
             </div>
           </DropdownMenuTrigger>
@@ -102,7 +84,7 @@ const AppNavbar = () => {
           >
             <DropdownMenuLabel className="text-emerald-300 font-bold text-sm px-3 py-2 bg-gradient-to-r from-emerald-500/5 to-teal-500/5 rounded-lg mb-1">
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
+                <div className="w-2 h-2 bg-emerald-400 rounded-full " />
                 My Account
               </div>
             </DropdownMenuLabel>

@@ -63,14 +63,7 @@ export default function AppSearchPrescription() {
   console.log(patients);
   
   return (
-    <section className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-900 relative overflow-hidden">
-      {/* Ambient background effects */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-emerald-400/20 to-teal-400/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-teal-400/20 to-emerald-400/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/3 left-1/3 w-64 h-64 bg-gradient-to-br from-emerald-400/10 to-teal-400/10 rounded-full blur-3xl animate-pulse delay-500"></div>
-      </div>
-
+    <section className="min-h-screen relative overflow-hidden">
       <div className="relative z-10 p-6">
         <div className="w-full max-w-4xl mx-auto">
           {/* Header Section */}
@@ -104,13 +97,13 @@ export default function AppSearchPrescription() {
             <CardContent className="p-6 space-y-4">
               <div className="flex gap-3">
                 <div className="relative flex-1">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4" />
                   <Input
                     placeholder="Filter patient by name..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-                    className="pl-10 bg-white/5 border-white/10 text-white placeholder:text-slate-400 focus:border-emerald-400 focus:ring-emerald-400/20 transition-all duration-300"
+                    className="pl-10 bg-white/5 border-white/10 text-white  focus:border-emerald-400 focus:ring-emerald-400/20 transition-all duration-300"
                   />
                 </div>
                 <Button 

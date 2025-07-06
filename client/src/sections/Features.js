@@ -4,6 +4,7 @@ import Key from "@/components/ui/key";
 import { File, FileText, Mic, Zap, Brain, Shield } from "lucide-react";
 import { motion } from "framer-motion";
 import { RegisterLink } from "@kinde-oss/kinde-auth-nextjs";
+import { OrbitingCircles } from "@/components/magicui/orbiting-circles";
 
 const barHeights = [20, 32, 16, 40, 24, 40, 16, 32, 20];
 
@@ -317,101 +318,21 @@ export default function Features() {
                 >
                   <Shield className="w-full h-full" />
                 </motion.div>
-
-                {/* Enhanced Keys */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.1 }}
-                  viewport={{ once: true }}
-                >
-                  <Key className="w-28 hover:shadow-lg hover:shadow-emerald-400/30 transition-all duration-300 bg-gradient-to-r from-emerald-400/20 to-teal-500/20 backdrop-blur-sm border border-emerald-400/30">
+                <OrbitingCircles radius={100}>
+                  <Key className="w-28 p-4 hover:shadow-lg text-primary hover:shadow-emerald-400/30 transition-all duration-300 bg-gradient-to-r from-emerald-400/20 to-teal-500/20 backdrop-blur-sm border border-emerald-400/30">
                     Approve
                   </Key>
-                </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                  viewport={{ once: true }}
-                >
-                  <Key className="w-28 hover:shadow-lg hover:shadow-emerald-400/30 transition-all duration-300 bg-gradient-to-r from-emerald-400/20 to-teal-500/20 backdrop-blur-sm border border-emerald-400/30">
+                   <Key className="w-28 p-4 hover:shadow-lg text-primary hover:shadow-emerald-400/30 transition-all duration-300 bg-gradient-to-r from-emerald-400/20 to-teal-500/20 backdrop-blur-sm border border-emerald-400/30">
                     Edit
                   </Key>
-                </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
-                  viewport={{ once: true }}
-                >
-                  <Key className="w-28 hover:shadow-lg hover:shadow-emerald-400/30 transition-all duration-300 bg-gradient-to-r from-emerald-400/20 to-teal-500/20 backdrop-blur-sm border border-emerald-400/30">
+                  <Key className="w-28 p-4 hover:shadow-lg text-primary hover:shadow-emerald-400/30 transition-all duration-300 bg-gradient-to-r from-emerald-400/20 to-teal-500/20 backdrop-blur-sm border border-emerald-400/30">
                     Manage
                   </Key>
-                </motion.div>
-
-                {/* Connecting lines between keys */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-4/5 h-px bg-gradient-to-r from-transparent via-emerald-400/20 to-transparent"></div>
-                </div>
+                </OrbitingCircles>
               </div>
             </FeatureCard>
           </motion.div>
         </div>
-
-        {/* Enhanced Call-to-Action */}
-        <motion.div
-          className="text-center mt-20"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          viewport={{ once: true }}
-        >
-          <motion.p
-            className="text-xl text-slate-400 mb-8"
-            animate={{
-              opacity: [0.7, 1, 0.7],
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          >
-            Ready to transform your healthcare practice?
-          </motion.p>
-
-          <motion.div
-            className="inline-flex items-center gap-2 py-3 px-8 bg-gradient-to-r from-emerald-400 to-teal-500 rounded-full text-black font-semibold cursor-pointer group hover:shadow-2xl hover:shadow-emerald-400/50 transition-all duration-500"
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.95 }}
-          >
-          <RegisterLink className="flex justify-center items-center lg:justify-start">
-            <span>Get Started Today</span>
-            <motion.svg
-              className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              animate={{ x: [0, 5, 0] }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M13 7l5 5m0 0l-5 5m5-5H6"
-              />
-            </motion.svg>
-            </RegisterLink>
-          </motion.div>
-        </motion.div>
       </div>
     </section>
   );

@@ -67,6 +67,15 @@
 
   --color-primary-glow: rgba(68, 229, 231, 0.2);
   --color-primary-50-glow: rgba(236, 252, 253, 0.2);
+  --animate-orbit: orbit calc(var(--duration)*1s) linear infinite;
+  @keyframes orbit {
+  0% {
+    transform: rotate(calc(var(--angle) * 1deg)) translateY(calc(var(--radius) * 1px)) rotate(calc(var(--angle) * -1deg));
+    }
+  100% {
+    transform: rotate(calc(var(--angle) * 1deg + 360deg)) translateY(calc(var(--radius) * 1px)) rotate(calc((var(--angle) * -1deg) - 360deg));
+    }
+  }
 }
 
 :root {
@@ -157,7 +166,6 @@
   --sidebar-ring: #666666;
 }
 
-
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -186,4 +194,13 @@ html {
 .fade-out {
   opacity: 0;
   transform: translateY(20px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }

@@ -13,16 +13,10 @@ const footerLinks = [
 
 export default function Footer() {
   return (
-    <footer className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 overflow-hidden">
-      {/* Floating particles background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-4 -left-4 w-72 h-72 bg-emerald-400/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute -bottom-8 -right-8 w-96 h-96 bg-teal-400/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-r from-emerald-400/5 to-teal-400/5 rounded-full blur-2xl animate-pulse delay-500"></div>
-      </div>
-
+    <footer className="relative overflow-hidden">
+    
       {/* Main footer content */}
-      <div className="relative backdrop-blur-sm bg-slate-900/50 border-t border-emerald-400/20">
+      <div className="relative backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-6 py-12">
           {/* Top section with logo and social links */}
           <div className="flex flex-col lg:flex-row justify-between items-center mb-8">
@@ -42,7 +36,7 @@ export default function Footer() {
                 <h3 className="text-xl font-bold bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
                   MediScribe
                 </h3>
-                <p className="text-slate-400 text-sm">Building the future</p>
+                <p className="text-slate-400 text-sm">Built by CODE4CHANGE</p>
               </div>
             </div>
 
