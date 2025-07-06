@@ -19,13 +19,13 @@ const features = [
   },
   {
     title: "AI Diet Plans",
-    url: "/dashboard/aiDiet",
+    url: "/dashboard/fitnessGenerator",
     icon: Utensils,
     description: "Personalized nutrition recommendations based on patient data",
   },
   {
     title: "Exercise Routines",
-    url: "/dashboard/exercisePlans",
+    url: "/dashboard/fitnessGenerator",
     icon: Dumbbell,
     description: "Customized workout plans tailored to patient health status",
   },
