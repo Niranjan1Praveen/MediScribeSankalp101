@@ -1,22 +1,21 @@
-# MediScribe – Generative AI-Powered Clinical Documentation & Assistant WebApp
+# MediScribe – Simplify Medical Reports & Generative AI-Powered Clinical Documentation 
 
-**Hackathon:** Code For Bharat – Season 2  
+**Hackathon:** Sankalp 101 Hackathon  
 **Team Name:** CODE4CHANGE  
 **Team Members:**  
-- Niranjan Praveen (Team Leader)   
+- Debshata Choudhury (Team Leader)   
 - Abhishek Chaubhey  
 - Vaibhav Jain  
-- Debshata Choudhury   
+- Niranjan Praveen   
 
-📧 **Contact:** heckerhecker86@gmail.com 
+📧 **Contact:** debshatachoudhury@gmail.com 
 🔗 **Live Demo:** [https://medi-scribe-pi.vercel.app/](https://medi-scribe-pi.vercel.app/)
 
 ---
 
 ## 🚀 Problem Statement:
-**Automated Clinical Documentation using Generative AI:**  
-Leverage voice recognition and large language models (LLMs) to automatically transcribe, interpret, and generate structured, review-ready clinical notes and personalized treatment plans.
-
+**Health Report Summarizer:**  
+An AI-powered system that can ingest raw, complex health reports (lab reports, prescriptions, consultation summaries) and output simplified, structured summaries—highlighting key metrics, abnormal values, doctor’s notes, and lifestyle recommendations in plain language.
 ---
 
 ## 🧠 Overview of MediScribe
@@ -25,8 +24,9 @@ Leverage voice recognition and large language models (LLMs) to automatically tra
 
 Powered by **Gemini LLM APIs**, MediScribe bridges the gap between healthcare efficiency and human-centered care using:
 
+- 🧾 Medical Report Simplification
 - 🎙️ Voice-to-Text Transcription  
-- 🧾 Clinical Note Structuring  
+- 🗞 Clinical Note Structuring  
 - 💊 Digital Prescription Generation  
 - 🍎 Personalized Diet & Exercise Plans  
 - 🔐 Role-Based Multi-User Access
@@ -34,6 +34,9 @@ Powered by **Gemini LLM APIs**, MediScribe bridges the gap between healthcare ef
 ---
 
 ## 🧩 Core Features (LLM-Powered)
+
+- **📄 Medical Report Simplification:**  
+  Parses and highlights critical values, diagnoses, prescribed medication, and abnormal readings using LLMs.
 
 - **🎤 Real-time Voice Transcription + NLP:**  
   Uses Gemini Speech-to-Text + LLMs to convert bilingual (Hindi & English) doctor-patient conversations into structured notes.
@@ -151,5 +154,8 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 ---
 
 ## Summary
+Health Report Summarizer simplifies complex medical documents for clinicians and patients alike. From auto-generating digital prescriptions to highlighting key trends in lab results, the platform transforms the healthcare documentation experience through real-time transcription, AI summarization, and structured outputs.
 
 MediScribe transforms clinical documentation with an **AI-first approach**, combining real-time transcription, structured note extraction via **Gemini API**, and personalized health recommendations into a seamless SaaS platform—empowering clinicians to **reduce administrative overhead**, **improve patient engagement**, and **enhance care quality** in any healthcare setting.
+
+Built with a vision to reduce clinical burnout and improve accessibility, this tool aligns with the Sankalp 101 Hackathon theme of tech-driven social impact in healthcare.
