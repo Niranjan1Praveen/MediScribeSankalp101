@@ -14,8 +14,9 @@
 ---
 
 ## 🚀 Problem Statement:
-**Health Report Summarizer:**  
+**Health Report Summarizer:**
 An AI-powered system that can ingest raw, complex health reports (lab reports, prescriptions, consultation summaries) and output simplified, structured summaries—highlighting key metrics, abnormal values, doctor’s notes, and lifestyle recommendations in plain language.
+
 ---
 
 ## 🧠 Overview of MediScribe
