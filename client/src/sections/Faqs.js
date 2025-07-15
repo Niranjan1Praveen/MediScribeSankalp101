@@ -59,7 +59,7 @@ export default function Faqs() {
         <div className="text-center mb-16 relative">
           <div className="absolute inset-0 blur-3xl rounded-full transform -translate-y-4"></div>
           <div className="relative">
-            <span className="inline-block text-emerald-400 font-semibold text-sm uppercase tracking-wider mb-4 backdrop-blur-sm px-4 py-2 rounded-full border border-emerald-500/30">
+            <span className="inline-block text-emerald-400 font-semibold text-sm uppercase tracking-wider mb-4 backdrop-blur-sm px-4 py-2 rounded-full border border-primary-400/30">
               FAQS
             </span>
             <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-white via-slate-200 to-emerald-400 bg-clip-text text-transparent mb-6 leading-tight">
@@ -67,7 +67,7 @@ export default function Faqs() {
               <br/>
               <span className="">
                  We've got answers
-                <div className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full transform scale-x-0 animate-pulse">
+                <div className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-emerald-400 to-teal-500 rounded-full transform scale-x-0 animate-pulse">
                   {" "}
                 </div>
               </span>
@@ -112,7 +112,7 @@ export default function Faqs() {
                     </AccordionTrigger>
                     <AccordionContent className="px-8 pb-6">
                       <div className="pl-12 pt-2">
-                        <div className="w-12 h-0.5 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full mb-4 transform scale-x-0 animate-pulse"></div>
+                        <div className="w-12 h-0.5 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full mb-4 transform scale-x-0 animate-pulse"></div>
                         <p className="text-slate-200 leading-relaxed text-base">
                           {faq.answer}
                         </p>
